@@ -1,0 +1,20 @@
+server:
+  port: 18020
+
+spring:
+  application:
+    name: 'app-batch'
+
+  config:
+    import:
+      - "classpath:application-domain.yml"
+
+  batch:
+    jdbc:
+      initialize-schema: always
+      # table-prefix: BATCH_
+      # isolation-level-for-create: serializable
+
+  scheduler:
+    cron:
+      tech-blog-scrap: "0 0 7 * * *" # 오전 7시
