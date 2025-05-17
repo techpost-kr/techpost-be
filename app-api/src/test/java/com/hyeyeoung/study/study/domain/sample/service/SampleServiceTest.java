@@ -4,65 +4,79 @@ import com.hyeyeoung.study.appapi.domain.sample.dto.SampleDto;
 import com.hyeyeoung.study.appapi.domain.sample.entity.Sample;
 import com.hyeyeoung.study.appapi.domain.sample.repository.SampleJpaRepository;
 import com.hyeyeoung.study.appapi.domain.sample.service.SampleService;
+import com.hyeyeoung.study.study.domain.MockTest;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.*;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 import java.util.Optional;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest
-public class SampleServiceTest {
+public class SampleServiceTest extends MockTest {
 
-    @Autowired
-    private SampleService sampleService;
-
-    @Autowired
+    @Mock
     private SampleJpaRepository sampleRepository;
 
+    @InjectMocks
+    private SampleService sampleService;
+
+    private Sample sample1;
+    private Sample sample2;
+
+    @BeforeEach
+    void setUp() {
+        sample1 = Sample.of("Sample 1");
+        // id 수동 설정 필요 시 sample1.setSampleSeq(1L);
+        sample2 = Sample.of("Sample 2");
+    }
+
     @Test
+    @DisplayName("단건 조회 테스트")
     void testSelectSample() {
-        // given: 샘플 데이터 생성 및 저장
-        Sample sample = Sample.of("Sample Content");
-        sampleRepository.save(sample);
+        // given
+        Mockito.when(sampleRepository.findById(sample1.getSampleSeq()))
+                .thenReturn(Optional.of(sample1));
 
-        // when: SampleSeq로 데이터를 조회
-        SampleDto sampleDto = sampleService.select(sample.getSampleSeq());
+        // when
+        SampleDto result = sampleService.select(sample1.getSampleSeq());
 
-        // then: 조회된 데이터가 예상된 값인지 검증
-        assertNotNull(sampleDto);
-        assertEquals("Sample Content", sampleDto.getContent());
+        // then
+        assertNotNull(result);
+        assertThat(result.getContent()).isEqualTo("Sample 1");
     }
 
     @Test
+    @DisplayName("전체 조회 테스트")
     void testSelectAllSamples() {
-        // given: 샘플 데이터 생성 및 저장
-        Sample sample1 = Sample.of("Sample 1");
-        Sample sample2 = Sample.of("Sample 2");
-        sampleRepository.save(sample1);
-        sampleRepository.save(sample2);
+        // given
+        Mockito.when(sampleRepository.findAll())
+                .thenReturn(List.of(sample1, sample2));
 
-        // when: 모든 샘플 데이터 조회
-        List<SampleDto> samples = sampleService.selectAll();
+        // when
+        List<SampleDto> results = sampleService.selectAll();
 
-        // then: 데이터 개수와 내용을 검증
-        assertNotNull(samples);
-        org.assertj.core.api.Assertions.assertThat(samples.size()).isPositive();
+        // then
+        assertThat(results).isNotNull();
+        assertThat(results.size()).isEqualTo(2);
+        assertThat(results).extracting("content").containsExactlyInAnyOrder("Sample 1", "Sample 2");
     }
 
     @Test
+    @DisplayName("삭제 테스트")
     void testDeleteSample() {
-        // given: 샘플 데이터 생성 및 저장
-        Sample sample = Sample.of("Sample to Delete");
-        sampleRepository.save(sample);
+        // given
+        // 삭제는 void 메서드라 별도 반환값 없음
 
-        // when: 샘플 데이터 삭제
-        sampleRepository.delete(sample);
+        // when
+        sampleRepository.deleteById(sample1.getSampleSeq());
 
-        // then: 해당 데이터가 더 이상 존재하지 않음을 검증
-        Optional<Sample> deletedSample = sampleRepository.findById(sample.getSampleSeq());
-        assertTrue(deletedSample.isEmpty());
+        // then
+        Mockito.verify(sampleRepository).deleteById(sample1.getSampleSeq());
     }
 }
