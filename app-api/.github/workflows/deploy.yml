@@ -1,0 +1,28 @@
+name: Deploy to AWS EC2
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Target branch'
+        required: true
+        default: master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Create SSH Key
+        run: |
+          echo "${{ secrets.AWS_EC2_SSH_KEY }}" > ${{ runner.temp }}/ec2_key.pem
+          chmod 600 ${{ runner.temp }}ec2_key.pem
+
+      - name: Deploy via SSH
+        run: |
+          ssh -o StrictHostKeyChecking=no -i ${{ runner.temp }}/ec2_key.pem ec2-user@${{ secrets.AWS_EC2_HOST }} << 'EOF'
+            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/techpost-app-api:latest
+            docker stop app-api || true
+            docker rm app-api || true
+            docker run -d --name app-api -p 18010:18010 ${{ secrets.DOCKERHUB_USERNAME }}/techpost-app-api:latest
+          EOF
