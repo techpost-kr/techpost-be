@@ -12,6 +12,16 @@ on:
       port:
         required: true
         type: string
+      spring_profiles_active:
+        required: true
+        type: string
+    secrets:
+      DOCKERHUB_USERNAME:
+        required: true
+      AWS_EC2_HOST:
+        required: true
+      AWS_EC2_SSH_KEY:
+        required: true
 
 jobs:
   deploy:
@@ -21,13 +31,13 @@ jobs:
       - name: Create SSH Key
         run: |
           echo "${{ secrets.AWS_EC2_SSH_KEY }}" > ${{ runner.temp }}/ec2_key.pem
-          chmod 600 ${{ runner.temp }}ec2_key.pem
+          chmod 600 ${{ runner.temp }}/ec2_key.pem
 
       - name: Deploy via SSH
         run: |
           ssh -o StrictHostKeyChecking=no -i ${{ runner.temp }}/ec2_key.pem ec2-user@${{ secrets.AWS_EC2_HOST }} << EOF
-            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/${{ inputs.project }}/${{ inputs.module }}:latest
+            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/${{ inputs.project }}-${{ inputs.module }}:1.0.0
             docker stop ${{ inputs.module }} || true
             docker rm ${{ inputs.module }} || true
-            docker run -d --name ${{ inputs.module }} -p ${{ inputs.port }}:${{ inputs.port }} ${{ secrets.DOCKERHUB_USERNAME }}/${{ inputs.project }}/${{ inputs.module }}:latest
+            docker run -d --name ${{ inputs.module }} -p ${{ inputs.port }}:${{ inputs.port }} -e SPRING_PROFILES_ACTIVE=${{ inputs.spring_profiles_active }} ${{ secrets.DOCKERHUB_USERNAME }}/${{ inputs.project }}-${{ inputs.module }}:1.0.0
           EOF
