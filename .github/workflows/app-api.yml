@@ -1,0 +1,19 @@
+name: App API Pipeline
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    uses: ./.github/workflows/build.yml
+    with:
+      project: techpost
+      module: app-api
+
+  deploy:
+    needs: build
+    uses: ./.github/workflows/deploy.yml
+    with:
+      project: techpost
+      module: app-api
+      port: 18010

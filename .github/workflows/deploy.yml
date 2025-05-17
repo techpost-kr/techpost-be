@@ -1,0 +1,33 @@
+name: Deploy to AWS EC2
+
+on:
+  workflow_call:
+    inputs:
+      project:
+        required: true
+        type: string
+      module:
+        required: true
+        type: string
+      port:
+        required: true
+        type: string
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Create SSH Key
+        run: |
+          echo "${{ secrets.AWS_EC2_SSH_KEY }}" > ${{ runner.temp }}/ec2_key.pem
+          chmod 600 ${{ runner.temp }}ec2_key.pem
+
+      - name: Deploy via SSH
+        run: |
+          ssh -o StrictHostKeyChecking=no -i ${{ runner.temp }}/ec2_key.pem ec2-user@${{ secrets.AWS_EC2_HOST }} << EOF
+            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/${{ inputs.project }}/${{ inputs.module }}:latest
+            docker stop ${{ inputs.module }} || true
+            docker rm ${{ inputs.module }} || true
+            docker run -d --name ${{ inputs.module }} -p ${{ inputs.port }}:${{ inputs.port }} ${{ secrets.DOCKERHUB_USERNAME }}/${{ inputs.project }}/${{ inputs.module }}:latest
+          EOF
