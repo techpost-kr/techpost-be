@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 public class Sample {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long sampleSeq;
 
     @Column
