@@ -1,6 +1,11 @@
 spring:
+  config:
+    import: aws-secretsmanager:dev/techpost/mysql
   datasource:
-    driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://localhost:13306/woorim
-    username: woorim_svc
-    password: woorim_svc
+    url: jdbc:mysql://${host}:${port}/techpost_dev
+    username: ${username}
+    password: ${password}
+
+aws:
+  region: ap-northeast-2
+

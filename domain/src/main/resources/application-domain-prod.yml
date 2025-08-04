@@ -1,6 +1,11 @@
 spring:
+  config:
+    import: aws-secretsmanager:prod/techpost/mysql
   datasource:
-    driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://3.34.11.71:13306/techpost
-    username: techpost
-    password: techpost
+    url: jdbc:mysql://${host}:${port}/techpost
+    username: ${username}
+    password: ${password}
+
+aws:
+  region: ap-northeast-2
+
