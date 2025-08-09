@@ -4,7 +4,7 @@ import com.hyeyeoung.study.common.crypto.symmetric.enums.AESKeySize;
 
 public class AES128Cipher extends AESCipher {
 
-    public AES128Cipher(byte[] keyBytes) throws Exception {
+    public AES128Cipher(byte[] keyBytes) {
         super(AESKeySize._128, keyBytes);
     }
 }
