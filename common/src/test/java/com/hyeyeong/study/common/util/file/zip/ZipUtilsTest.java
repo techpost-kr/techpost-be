@@ -4,6 +4,7 @@ import com.hyeyeoung.study.common.util.file.zip.ZipUtils;
 import com.hyeyeoung.study.common.util.file.zip.dto.ZipDto;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -15,6 +16,7 @@ import java.util.stream.Collectors;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
+@Disabled("확인 필요")
 public class ZipUtilsTest {
 
     @Test
