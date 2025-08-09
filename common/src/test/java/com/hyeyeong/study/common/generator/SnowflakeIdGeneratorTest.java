@@ -48,8 +48,8 @@ public class SnowflakeIdGeneratorTest {
     }
 
     @Test
-    @DisplayName("0L 이 1900-01-01 00:00:00 과 동일한지 확인")
-    public void zero_is_1900_01_01_00_00_00_이다() {
+    @DisplayName("0L 이 1970-01-01 00:00:00 과 동일한지 확인")
+    public void zero_is_1970_01_01_00_00_00_이다() {
 
         // given
         long twepoch = 0L;
