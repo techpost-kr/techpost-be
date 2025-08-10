@@ -1,8 +1,3 @@
 rootProject.name = 'techpost-be'
 
-include 'app-api'
-include 'app-batch'
-
-include 'common'
-include 'domain'
-
+include 'common', 'domain', 'app-api', 'app-batch'

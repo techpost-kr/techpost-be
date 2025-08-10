@@ -1,15 +1,14 @@
 package com.hyeyeoung.study.common.slack.webhook.dto;
 
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 /**
  * <a href="https://api.slack.com/messaging/webhooks">...</a>
  */
 @Getter
-@AllArgsConstructor
-@NoArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class SlackWebhookRequest {
 
     private String text;
