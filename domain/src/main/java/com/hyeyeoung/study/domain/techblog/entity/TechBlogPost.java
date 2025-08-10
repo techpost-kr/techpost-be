@@ -2,6 +2,7 @@ package com.hyeyeoung.study.domain.techblog.entity;
 
 
 import com.hyeyeoung.study.domain.common.constant.TableConstants;
+import com.hyeyeoung.study.domain.common.entity.BaseEntity;
 import com.hyeyeoung.study.domain.techblog.enums.TechBlogEnum;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -17,7 +18,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder
 @Table(name = TableConstants.TECH_BLOG_POST)
-public class TechBlogPost {
+public class TechBlogPost extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,19 +35,7 @@ public class TechBlogPost {
     private String url;
 
     @Column
-    private LocalDateTime publishedDateTime; // 작성일시
-
-    @Column
-    private Long createdBy;
-
-    @Column
-    private LocalDateTime createdDateTime;
-
-    @Column
-    private Long modifiedBy;
-
-    @Column
-    private LocalDateTime modifiedDateTime;
+    private LocalDateTime publishedDateTime;
 
     public static TechBlogPost of(TechBlogEnum techBlogEnum,
                                   String title,
@@ -57,10 +46,6 @@ public class TechBlogPost {
                 .title(title)
                 .url(url)
                 .publishedDateTime(publishedDateTime)
-                .createdBy(1L)
-                .createdDateTime(LocalDateTime.now())
-                .modifiedBy(1L)
-                .modifiedDateTime(LocalDateTime.now())
                 .build();
     }
 }
