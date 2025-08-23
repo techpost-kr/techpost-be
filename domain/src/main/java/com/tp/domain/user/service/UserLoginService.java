@@ -1,14 +1,14 @@
 package com.tp.domain.user.service;
 
-import com.tp.common.jwt.JwtGenerator;
+import com.tp.common.PasswordUtils;
 import com.tp.common.response.enums.ApiResponseEnum;
 import com.tp.common.response.exception.ApiResponseException;
-import com.tp.common.util.PasswordUtils;
 import com.tp.domain.user.dto.param.UserLoginParam;
 import com.tp.domain.user.dto.result.UserLoginResult;
 import com.tp.domain.user.entity.User;
 import com.tp.domain.user.enums.UserStatusEnum;
 import com.tp.domain.user.repository.UserRepository;
+import com.tp.jwt.JwtGenerator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

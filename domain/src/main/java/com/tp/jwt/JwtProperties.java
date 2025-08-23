@@ -1,4 +1,4 @@
-package com.tp.common.jwt;
+package com.tp.jwt;
 
 
 import lombok.Getter;

@@ -1,4 +1,4 @@
-package com.tp.common.jwt;
+package com.tp.jwt;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;

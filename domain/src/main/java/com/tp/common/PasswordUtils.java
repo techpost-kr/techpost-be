@@ -1,4 +1,4 @@
-package com.tp.common.util;
+package com.tp.common;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
