@@ -1,6 +1,6 @@
-package com.hyeyeoung.study.common.slack.webhook;
+package com.hyeyeoung.slack.webhook;
 
-import com.hyeyeoung.study.common.slack.webhook.dto.SlackWebhookRequest;
+import com.hyeyeoung.slack.webhook.dto.SlackWebhookRequest;
 import lombok.experimental.UtilityClass;
 import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.client.WebClient;

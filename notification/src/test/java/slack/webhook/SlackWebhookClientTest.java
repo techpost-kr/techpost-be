@@ -1,7 +1,7 @@
-package com.hyeyeong.study.common.slack.webhook;
+package slack.webhook;
 
-import com.hyeyeoung.study.common.slack.webhook.SlackWebhookClient;
-import com.hyeyeoung.study.common.slack.webhook.dto.SlackWebhookRequest;
+import com.hyeyeoung.slack.webhook.SlackWebhookClient;
+import com.hyeyeoung.slack.webhook.dto.SlackWebhookRequest;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

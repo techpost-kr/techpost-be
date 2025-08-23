@@ -1,3 +1,5 @@
 rootProject.name = 'techpost-be'
 
 include 'common', 'domain', 'app-api', 'app-batch'
+
+include 'notification'

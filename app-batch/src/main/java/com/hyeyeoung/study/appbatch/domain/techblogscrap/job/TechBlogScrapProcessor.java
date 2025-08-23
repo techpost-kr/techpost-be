@@ -1,10 +1,10 @@
 package com.hyeyeoung.study.appbatch.domain.techblogscrap.job;
 
+import com.hyeyeoung.slack.webhook.SlackWebhookClient;
+import com.hyeyeoung.slack.webhook.dto.SlackWebhookRequest;
 import com.hyeyeoung.study.appbatch.domain.techblogscrap.enums.TechBlogScrapEnum;
 import com.hyeyeoung.study.appbatch.domain.techblogscrap.scraper.TechBlogScraper;
 import com.hyeyeoung.study.appbatch.domain.techblogscrap.scraper.TechBlogScraperFactory;
-import com.hyeyeoung.study.common.slack.webhook.SlackWebhookClient;
-import com.hyeyeoung.study.common.slack.webhook.dto.SlackWebhookRequest;
 import com.hyeyeoung.study.domain.slack.entity.repository.SlackWebhookRepository;
 import com.hyeyeoung.study.domain.slack.enums.SlackWebhookEnum;
 import com.hyeyeoung.study.domain.techblog.entity.TechBlogPost;

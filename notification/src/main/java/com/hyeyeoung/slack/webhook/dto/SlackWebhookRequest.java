@@ -1,4 +1,4 @@
-package com.hyeyeoung.study.common.slack.webhook.dto;
+package com.hyeyeoung.slack.webhook.dto;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
