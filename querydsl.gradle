@@ -1,0 +1,27 @@
+// QueryDSL 의존성
+dependencies {
+    implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta'
+    annotationProcessor(
+            'com.querydsl:querydsl-apt:5.0.0:jakarta',
+            'jakarta.annotation:jakarta.annotation-api',
+            'jakarta.persistence:jakarta.persistence-api'
+    )
+}
+
+// QueryDSL Q클래스 생성 위치 지정
+def querydslDir = "${layout.buildDirectory.get()}/generated/querydsl"
+
+// QueryDSL Q클래스 소스 위치 지정
+sourceSets {
+    main.java.srcDir querydslDir
+}
+
+// clean 시에 QClass 디렉토리 삭제
+clean {
+    delete file(querydslDir)
+}
+
+// compile 시에 사용할 옵션 지정
+tasks.withType(JavaCompile).configureEach {
+    options.getGeneratedSourceOutputDirectory().set(file(querydslDir))
+}

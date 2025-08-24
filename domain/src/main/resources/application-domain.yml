@@ -1,3 +1,7 @@
+jwt:
+  secret-key: "mySecretKey123456mySecretKey123456"
+  expiration-time: 86400000 # 예: 1일(밀리초 단위)
+
 spring:
   datasource:
     hikari:
@@ -21,7 +25,3 @@ spring:
         hibernate.dialect: org.hibernate.dialect.MySQL8Dialect
     show-sql: true # JPA 처리시 발생하는 SQL 을 보여줄 것인지 결정하는 설정
     open-in-view: false
-
-  config:
-    import:
-      - "classpath:application-common.yml"
