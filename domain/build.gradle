@@ -1,4 +1,9 @@
-apply from: '../querydsl.gradle'
+plugins {
+    id 'io.spring.dependency-management'
+}
+dependencyManagement {
+    imports { mavenBom "org.springframework.boot:spring-boot-dependencies:3.3.3" }
+}
 
 dependencies {
     implementation project(':common')
@@ -11,4 +16,6 @@ dependencies {
 
     // todo: domain module 에서 infra module 분리할 때, 이동 고민
     implementation 'io.awspring.cloud:spring-cloud-aws-starter-secrets-manager:3.1.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter'
 }
+apply from: '../querydsl.gradle'

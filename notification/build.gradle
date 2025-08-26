@@ -1,32 +1,13 @@
+plugins {
+    id 'io.spring.dependency-management'
+}
+dependencyManagement {
+    imports { mavenBom "org.springframework.boot:spring-boot-dependencies:3.3.3" }
+}
 dependencies {
     implementation project(':common')
-    // Spring WebFlux (for WebClient)
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
-    // Spring Boot Starters
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-
-    // QueryDSL 의존성
-    implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta'
-    annotationProcessor(
-            'com.querydsl:querydsl-apt:5.0.0:jakarta',
-            'jakarta.annotation:jakarta.annotation-api',
-            'jakarta.persistence:jakarta.persistence-api'
-    )
-
+    testImplementation 'org.junit.jupiter:junit-jupiter'
 }
-
-
-// QueryDSL Q클래스 생성 위치 지정
-def querydslDir = "$buildDir/generated/querydsl"
-
-sourceSets {
-    main.java.srcDir querydslDir
-}
-
-clean {
-    delete file(querydslDir)
-}
-
-tasks.withType(JavaCompile) {
-    options.getGeneratedSourceOutputDirectory().set(file(querydslDir))
-}
+apply from: '../querydsl.gradle'
