@@ -1,31 +1,21 @@
 plugins {
-    id 'java'
-    id 'org.springframework.boot' version '3.3.3'
-    id 'io.spring.dependency-management' version '1.1.6'
+    id 'io.spring.dependency-management'
 }
-
-group = 'com.hyeyeoung'
-version = '1.0-SNAPSHOT'
-
-bootJar {
-    enabled = false
-}
-
-jar {
-    enabled = true
+dependencyManagement {
+    imports { mavenBom "org.springframework.boot:spring-boot-dependencies:3.3.3" }
 }
 
 dependencies {
+    implementation project(':common')
+    runtimeOnly 'com.mysql:mysql-connector-j'
+    implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+    implementation 'io.jsonwebtoken:jjwt-impl:0.11.5'
+    implementation 'io.jsonwebtoken:jjwt-jackson:0.11.5'
+    implementation 'org.springframework.security:spring-security-crypto'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    // todo: domain module 에서 infra module 분리할 때, 이동 고민
     implementation 'io.awspring.cloud:spring-cloud-aws-starter-secrets-manager:3.1.0'
-    implementation 'mysql:mysql-connector-java:8.0.33'
-
-    // querydsl config on spring boot 3.x version
-    implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta'
-    annotationProcessor "com.querydsl:querydsl-apt:5.0.0:jakarta"
-    annotationProcessor "jakarta.annotation:jakarta.annotation-api"
-    annotationProcessor "jakarta.persistence:jakarta.persistence-api"
-
-    implementation(project(':common'))
+    testImplementation 'org.junit.jupiter:junit-jupiter'
 }
-
+apply from: '../querydsl.gradle'
