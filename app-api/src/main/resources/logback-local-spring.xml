@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true">
+
+    <!-- 공통 패턴 -->
+    <property name="LOG_PATTERN"
+              value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg | traceId=%X{traceId} userId=%X{userId} clientIp=%X{clientIp} uri=%X{reqUri} method=%X{reqMethod} status=%X{respStatus}%n"/>
+
+    <!-- 콘솔 -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 패키지 별 레벨 조절 (필요 시) -->
+    <logger name="org.hibernate.SQL" level="INFO"/>
+    <logger name="org.springframework" level="INFO"/>
+
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+
+</configuration>
