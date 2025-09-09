@@ -2,3 +2,5 @@ spring:
   config:
     import:
       - "classpath:application-domain-local.yml"
+logging:
+  config: classpath:logback-local-spring.xml
