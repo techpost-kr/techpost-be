@@ -1,4 +1,6 @@
 spring:
-  config:
-    import:
-      - "classpath:application-domain-prod.yml"
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/techpost
+    username: postgres # TODO: change username and password for local setup
+    password: postgres # TODO: change username and password for local setup

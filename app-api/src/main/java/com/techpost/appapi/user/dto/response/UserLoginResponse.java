@@ -1,7 +1,7 @@
 package com.techpost.appapi.user.dto.response;
 
-import com.techpost.domain.user.dto.result.UserLoginResult;
-import com.techpost.domain.user.enums.UserRoleEnum;
+import com.techpost.appapi.user.dto.result.UserLoginResult;
+import com.techpost.appapi.user.enums.UserRoleEnum;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

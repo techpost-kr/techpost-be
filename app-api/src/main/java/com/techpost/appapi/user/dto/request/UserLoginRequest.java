@@ -1,6 +1,6 @@
 package com.techpost.appapi.user.dto.request;
 
-import com.techpost.domain.user.dto.param.UserLoginParam;
+import com.techpost.appapi.user.dto.param.UserLoginParam;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
