@@ -1,4 +1,4 @@
-package com.techpost.domain.techblog.enums;
+package com.techpost.domain.post.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,7 +10,7 @@ import static org.springframework.util.StringUtils.hasText;
 
 @Getter
 @AllArgsConstructor
-public enum TechBlogEnum {
+public enum Publisher {
 
     KAKAO("카카오"),
     NAVER("네이버"),
@@ -18,7 +18,7 @@ public enum TechBlogEnum {
 
     private final String name;
 
-    public static Optional<TechBlogEnum> findByName(String name) {
+    public static Optional<Publisher> findByName(String name) {
         if (!hasText(name)) return Optional.empty();
         return Arrays.stream(values())
                 .filter(item -> item.getName().contains(name))

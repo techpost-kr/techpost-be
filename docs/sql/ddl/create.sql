@@ -1,7 +1,7 @@
-CREATE TABLE TechBlogPosts
+CREATE TABLE posts
 (
-    techBlogPostSeq   bigint(20) NOT NULL primary key,
-    techBlogEnum      enum ('KAKAO','NAVER','WOOWAHAN') DEFAULT NULL,
+    postseq   bigint(20) NOT NULL primary key,
+    publisher      enum ('KAKAO','NAVER','WOOWAHAN') DEFAULT NULL,
     title             varchar(255)                      DEFAULT NULL,
     url               varchar(255)                      DEFAULT NULL,
     publishedDateTime datetime(6)                       DEFAULT NULL comment '작성일자',

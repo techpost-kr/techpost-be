@@ -5,9 +5,9 @@ import com.techpost.appbatch.domain.techblogscrap.scraper.TechBlogScraper;
 import com.techpost.appbatch.domain.techblogscrap.scraper.TechBlogScraperFactory;
 import com.techpost.domain.slack.entity.repository.SlackWebhookRepository;
 import com.techpost.domain.slack.enums.SlackWebhookEnum;
-import com.techpost.domain.techblog.entity.TechBlogPost;
-import com.techpost.domain.techblog.enums.TechBlogEnum;
-import com.techpost.domain.techblog.repository.TechBlogPostRepository;
+import com.techpost.domain.post.entity.Post;
+import com.techpost.domain.post.enums.Publisher;
+import com.techpost.domain.post.repository.PostRepository;
 import com.techpost.slack.webhook.SlackWebhookClient;
 import com.techpost.slack.webhook.dto.SlackWebhookRequest;
 import jakarta.annotation.Nonnull;
@@ -25,51 +25,51 @@ import java.util.stream.Collectors;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-public class TechBlogScrapProcessor implements ItemProcessor<TechBlogScrapEnum, List<TechBlogPost>> {
+public class TechBlogScrapProcessor implements ItemProcessor<TechBlogScrapEnum, List<Post>> {
 
     private final TechBlogScraperFactory techBlogScraperFactory;
 
-    private final TechBlogPostRepository techBlogPostRepository;
+    private final PostRepository postRepository;
 
     private final SlackWebhookRepository slackWebhookRepository;
 
     @Override
-    public List<TechBlogPost> process(@Nonnull TechBlogScrapEnum techBlogScrapEnum) {
+    public List<Post> process(@Nonnull TechBlogScrapEnum techBlogScrapEnum) {
 
         log.info("start scrap process");
 
-        List<TechBlogPost> techBlogPosts = scrap(techBlogScrapEnum);
+        List<Post> posts = scrap(techBlogScrapEnum);
 
-        sendSlackWebhook(techBlogPosts);
+        sendSlackWebhook(posts);
 
-        return techBlogPosts;
+        return posts;
 
     }
 
-    private List<TechBlogPost> scrap(TechBlogScrapEnum techBlogScrapEnum) {
+    private List<Post> scrap(TechBlogScrapEnum techBlogScrapEnum) {
         TechBlogScraper techBlogScraper = techBlogScraperFactory.getTechBlogScraper(techBlogScrapEnum);
 
-        List<TechBlogPost> techBlogPosts = techBlogScraper.scrap();
+        List<Post> posts = techBlogScraper.scrap();
 
-        if (CollectionUtils.isEmpty(techBlogPosts)) return Collections.emptyList();
+        if (CollectionUtils.isEmpty(posts)) return Collections.emptyList();
 
-        Set<String> urlSet = getUrlSet(techBlogScrapEnum.getTechBlogEnum());
+        Set<String> urlSet = getUrlSet(techBlogScrapEnum.getPublisher());
 
-        return techBlogPosts.stream()
+        return posts.stream()
                 .filter(techBlogPost -> !urlSet.contains(techBlogPost.getUrl()))
                 .collect(Collectors.toList());
     }
 
     // url 기준으로 동일 데이터에 대해서 필터처리
-    private Set<String> getUrlSet(TechBlogEnum techBlogEnum) {
-        return techBlogPostRepository.findByTechBlogEnum(techBlogEnum).stream()
-                .map(TechBlogPost::getUrl)
+    private Set<String> getUrlSet(Publisher publisher) {
+        return postRepository.findByTechBlogEnum(publisher).stream()
+                .map(Post::getUrl)
                 .collect(Collectors.toSet());
     }
 
-    private void sendSlackWebhook(List<TechBlogPost> techBlogPosts) {
+    private void sendSlackWebhook(List<Post> posts) {
         String slackWebhookUrl = this.getUrl();
-        for (TechBlogPost techBlogPost : techBlogPosts) {
+        for (Post techBlogPost : posts) {
             try {
                 SlackWebhookClient.postMessage(slackWebhookUrl, this.createWebhookRequest(techBlogPost));
             } catch (RuntimeException e) {
@@ -85,7 +85,7 @@ public class TechBlogScrapProcessor implements ItemProcessor<TechBlogScrapEnum, 
                 .getUrl();
     }
 
-    private SlackWebhookRequest createWebhookRequest(TechBlogPost techBlogPost) {
+    private SlackWebhookRequest createWebhookRequest(Post techBlogPost) {
         String text = String.format("%s%n%s", techBlogPost.getTitle(), techBlogPost.getUrl());
         return SlackWebhookRequest.of(text);
     }

@@ -1,7 +1,7 @@
 package com.techpost.appbatch.domain.techblogscrap.job;
 
-import com.techpost.domain.techblog.entity.TechBlogPost;
-import com.techpost.domain.techblog.repository.TechBlogPostRepository;
+import com.techpost.domain.post.entity.Post;
+import com.techpost.domain.post.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.item.Chunk;
@@ -14,20 +14,20 @@ import java.util.stream.Collectors;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-public class TechBlogScrapWriter implements ItemWriter<List<TechBlogPost>> {
+public class TechBlogScrapWriter implements ItemWriter<List<Post>> {
 
-    private final TechBlogPostRepository techBlogPostRepository;
+    private final PostRepository postRepository;
 
     @Override
-    public void write(Chunk<? extends List<TechBlogPost>> chunk) {
+    public void write(Chunk<? extends List<Post>> chunk) {
 
         log.info("start scrap reader");
 
-        List<TechBlogPost> techBlogPosts = chunk.getItems().stream()
+        List<Post> posts = chunk.getItems().stream()
                 .flatMap(List::stream)
                 .collect(Collectors.toList());
 
-        techBlogPostRepository.saveAll(techBlogPosts);
+        postRepository.saveAll(posts);
 
     }
 }

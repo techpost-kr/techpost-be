@@ -9,9 +9,9 @@ actor Client
 
 Client -> TechBlogPostController: TechBlogPostRequest 요청한다.
 TechBlogPostController -> TechBlogPostController: TechBlogPostRequest 를 \nTechBlogPostQuery 로 변환한다.
-TechBlogPostController -> TechBlogPostQueryService: findTechBlogPosts 요청한다.
+TechBlogPostController -> TechBlogPostQueryService: findposts 요청한다.
 
-TechBlogPostQueryService -> TechBlogQuerydslRepository: findTechBlogPosts 요청한다.
+TechBlogPostQueryService -> TechBlogQuerydslRepository: findposts 요청한다.
 
 TechBlogQuerydslRepository -> TechBlogQuerydslRepository: List<TechBlogPost> 정보를 조회한다.
 TechBlogQuerydslRepository -> TechBlogPostQueryService: List<TechBlogPost> 반환한다.

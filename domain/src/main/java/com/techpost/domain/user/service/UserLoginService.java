@@ -8,7 +8,7 @@ import com.techpost.domain.user.dto.result.UserLoginResult;
 import com.techpost.domain.user.entity.User;
 import com.techpost.domain.user.enums.UserStatusEnum;
 import com.techpost.domain.user.repository.UserRepository;
-import com.techpost.domain.jwt.JwtGenerator;
+import com.techpost.domain.common.jwt.JwtGenerator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

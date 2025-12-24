@@ -1,4 +1,4 @@
-package com.techpost.domain.jwt;
+package com.techpost.domain.common.jwt;
 
 
 import lombok.Getter;

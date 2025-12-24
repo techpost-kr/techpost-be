@@ -29,7 +29,7 @@ public class TechBlogScraperFactory {
     public TechBlogScraper getTechBlogScraper(TechBlogScrapEnum techBlogScrapEnum) {
         TechBlogScraper scraper = scraperMap.get(techBlogScrapEnum);
         if (scraper == null) {
-            throw new IllegalArgumentException("No scraper found for: " + techBlogScrapEnum.getTechBlogEnum().getName());
+            throw new IllegalArgumentException("No scraper found for: " + techBlogScrapEnum.getPublisher().getName());
         }
         return scraper;
     }

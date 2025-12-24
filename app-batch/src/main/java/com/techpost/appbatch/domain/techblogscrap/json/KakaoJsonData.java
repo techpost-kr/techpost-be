@@ -2,7 +2,7 @@ package com.techpost.appbatch.domain.techblogscrap.json;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.techpost.appbatch.domain.techblogscrap.enums.TechBlogScrapEnum;
-import com.techpost.domain.techblog.entity.TechBlogPost;
+import com.techpost.domain.post.entity.Post;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,10 +15,10 @@ import java.util.stream.Collectors;
 public class KakaoJsonData {
     private List<KakaoPage> pages;
 
-    public List<TechBlogPost> toTechBlogPosts() {
+    public List<Post> toPosts() {
         return pages.stream()
                 .flatMap(page -> page.getContents().stream())
-                .map(KakaoPage.KakaoContent::toTechBlogPost)
+                .map(KakaoPage.KakaoContent::toPost)
                 .collect(Collectors.toList());
     }
 
@@ -40,8 +40,8 @@ public class KakaoJsonData {
             private KakaoAuthor author;
             private String thumbnailUri;
 
-            private TechBlogPost toTechBlogPost() {
-                return TechBlogPost.of(TechBlogScrapEnum.KAKAO.getTechBlogEnum(),
+            private Post toPost() {
+                return Post.of(TechBlogScrapEnum.KAKAO.getPublisher(),
                         this.title,
                         TechBlogScrapEnum.KAKAO.getPostUrl(String.valueOf(this.id)),
                         this.releaseDateTime);

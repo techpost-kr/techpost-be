@@ -1,7 +1,7 @@
 package com.techpost.appbatch.domain.techblogscrap.json;
 
 import com.techpost.appbatch.domain.techblogscrap.enums.TechBlogScrapEnum;
-import com.techpost.domain.techblog.entity.TechBlogPost;
+import com.techpost.domain.post.entity.Post;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,8 +16,8 @@ import java.util.stream.Collectors;
 public class NaverJsonData {
     private List<NaverContent> content;
 
-    public List<TechBlogPost> toTechBlogPosts() {
-        return content.stream().map(NaverContent::toTechBlogPost)
+    public List<Post> toPosts() {
+        return content.stream().map(NaverContent::toPost)
                 .collect(Collectors.toList());
     }
 
@@ -31,8 +31,8 @@ public class NaverJsonData {
         private String postTitle;
         private String url;
 
-        private TechBlogPost toTechBlogPost() {
-            return TechBlogPost.of(TechBlogScrapEnum.NAVER.getTechBlogEnum(),
+        private Post toPost() {
+            return Post.of(TechBlogScrapEnum.NAVER.getPublisher(),
                     this.postTitle,
                     TechBlogScrapEnum.NAVER.getPostUrl(this.url),
                     toPublishedDateTime());

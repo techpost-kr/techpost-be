@@ -1,9 +1,9 @@
-package com.techpost.domain.techblog.entity;
+package com.techpost.domain.post.entity;
 
 
 import com.techpost.domain.common.constant.TableConstants;
 import com.techpost.domain.common.entity.BaseEntity;
-import com.techpost.domain.techblog.enums.TechBlogEnum;
+import com.techpost.domain.post.enums.Publisher;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,16 +17,16 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = TableConstants.TECH_BLOG_POST)
-public class TechBlogPost extends BaseEntity {
+@Table(name = TableConstants.POST)
+public class Post extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long techBlogPostSeq;
+    private Long postseq;
 
     @Column
     @Enumerated(EnumType.STRING)
-    private TechBlogEnum techBlogEnum;
+    private Publisher publisher; // 발행처
 
     @Column
     private String title;
@@ -37,12 +37,12 @@ public class TechBlogPost extends BaseEntity {
     @Column
     private LocalDateTime publishedDateTime;
 
-    public static TechBlogPost of(TechBlogEnum techBlogEnum,
-                                  String title,
-                                  String url,
-                                  LocalDateTime publishedDateTime) {
-        return TechBlogPost.builder()
-                .techBlogEnum(techBlogEnum)
+    public static Post of(Publisher publisher,
+                          String title,
+                          String url,
+                          LocalDateTime publishedDateTime) {
+        return Post.builder()
+                .publisher(publisher)
                 .title(title)
                 .url(url)
                 .publishedDateTime(publishedDateTime)
