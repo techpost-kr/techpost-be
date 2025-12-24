@@ -1,26 +1,47 @@
 plugins {
-    id 'org.springframework.boot' version '3.3.3' apply false
-    id 'io.spring.dependency-management' version '1.1.6' apply false
+    id 'org.springframework.boot' version '4.0.0' apply false
+    id 'io.spring.dependency-management' version '1.1.7' apply false
+}
+
+ext {
+    lombokVersion = '1.18.42'
 }
 
 allprojects {
-    group = 'com.tp'
+    group = 'com.techpost'
     version = '1.0-SNAPSHOT'
 
-    repositories { mavenCentral() }
+    repositories {
+        mavenCentral()
+        maven { url = uri('https://projectlombok.org/edge-releases') }
+    }
+}
+
+subprojects {
 
     apply plugin: 'java'
+    apply plugin: 'io.spring.dependency-management'
 
     java {
-        toolchain { languageVersion = JavaLanguageVersion.of(21) }
+        toolchain {
+            languageVersion = JavaLanguageVersion.of(25)
+        }
+    }
+
+    tasks.withType(JavaCompile).configureEach {
+        options.encoding = 'UTF-8'
+        options.fork = true
     }
 
     dependencies {
-        compileOnly 'org.projectlombok:lombok:1.18.30'
-        annotationProcessor 'org.projectlombok:lombok:1.18.30'
-        testCompileOnly 'org.projectlombok:lombok:1.18.30'
-        testAnnotationProcessor 'org.projectlombok:lombok:1.18.30'
+        compileOnly "org.projectlombok:lombok:${lombokVersion}"
+        annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+
+        testCompileOnly "org.projectlombok:lombok:${lombokVersion}"
+        testAnnotationProcessor "org.projectlombok:lombok:${lombokVersion}"
     }
 
-    test { useJUnitPlatform() }
+    test {
+        useJUnitPlatform()
+    }
 }
