@@ -22,7 +22,7 @@ public class Post extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long postseq;
+    private Long postSeq;
 
     @Column
     @Enumerated(EnumType.STRING)

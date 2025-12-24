@@ -33,7 +33,7 @@ public class PostQueryRepositoryImpl implements PostQueryRepository {
     private <T> JPAQuery<T> postQuery(PostCriteria criteria, Expression<T> expression) {
         return jpaQueryFactory.select(expression)
                 .from(post)
-                .where(ExpressionUtils.or(eq(post.techBlogEnum, criteria.getTechBlogEnum()), contains(post.title, criteria.getQuery())))
+                .where(ExpressionUtils.or(eq(post.publisher, criteria.getPublisher()), contains(post.title, criteria.getQuery())))
                 .orderBy(post.publishedDateTime.desc());
     }
 

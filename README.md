@@ -14,7 +14,6 @@ TechPost는 테크 블로그 포스트를 수집, 관리하고 사용자에게 �
 - **Database**: MySQL (AWS RDS)
 - **ORM**: JPA/Hibernate, QueryDSL
 - **Batch**: Spring Batch, Quartz
-- **Cache**: EhCache
 - **Monitoring**: Spring Actuator
 - **Cloud**: AWS (Secrets Manager)
 
@@ -27,14 +26,12 @@ TechPost는 테크 블로그 포스트를 수집, 관리하고 사용자에게 �
   - RESTful API 엔드포인트 제공
   - `domain` 모듈을 이용해 비즈니스 로직 처리
   - Controller 계층 포함
-  - 캐싱 기능 (EhCache)
   - API 유효성 검증
   - 헬스체크 엔드포인트
 
 - **주요 의존성**:
   - Spring Web, JPA, Validation, Cache, Actuator
   - Jakarta Persistence API
-  - EhCache
 
 - **의존 관계**:
   - `domain` 모듈에 의존

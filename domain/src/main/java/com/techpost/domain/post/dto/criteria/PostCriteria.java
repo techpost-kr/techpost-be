@@ -14,7 +14,7 @@ public class PostCriteria {
         return new PostCriteria(query);
     }
 
-    public Publisher getTechBlogEnum() {
+    public Publisher getPublisher() {
         return Publisher.findByName(this.query).orElse(null);
     }
 }

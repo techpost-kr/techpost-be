@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class PostResult {
 
-    private Long postseq;
+    private Long postSeq;
     private Publisher publisher;
     private String title;
     private String url;
@@ -20,7 +20,7 @@ public class PostResult {
 
     @QueryProjection
     public PostResult(Post post) {
-        this.postseq = post.getpostseq();
+        this.postSeq = post.getPostSeq();
         this.publisher = post.getPublisher();
         this.title = post.getTitle();
         this.url = post.getUrl();
