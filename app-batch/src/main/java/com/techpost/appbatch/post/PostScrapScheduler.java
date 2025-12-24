@@ -1,10 +1,10 @@
-package com.techpost.appbatch.domain.techblogscrap;
+package com.techpost.appbatch.post;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.batch.core.Job;
-import org.springframework.batch.core.JobParameters;
-import org.springframework.batch.core.JobParametersBuilder;
+import org.springframework.batch.core.job.Job;
+import org.springframework.batch.core.job.parameters.JobParameters;
+import org.springframework.batch.core.job.parameters.JobParametersBuilder;
 import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -14,28 +14,28 @@ import org.springframework.stereotype.Component;
 @EnableScheduling
 @Slf4j
 @RequiredArgsConstructor
-public class TechBlogScrapScheduler {
+public class PostScrapScheduler {
 
     private final JobLauncher jobLauncher;
 
-    private final Job techBlogScrapJob;
+    private final Job postScrapJob;
 
     @Scheduled(cron = "${spring.scheduler.cron.tech-blog-scrap}")
     public void scrap() {
         try {
-            log.info("Starting tech blog scrap job...");
+            log.info("Starting post scrap job...");
 
             // TODO: 동일파라미터에 대해 성공 이력이 있으면 배치는 실행되지 않는 이슈
             JobParameters jobParameters = new JobParametersBuilder()
                     .addString("timestamp", String.valueOf(System.currentTimeMillis()))
                     .toJobParameters();
 
-            jobLauncher.run(techBlogScrapJob, jobParameters);
+            jobLauncher.run(postScrapJob, jobParameters);
 
-            log.info("Tech blog scrap job completed.");
+            log.info("Post scrap job completed.");
 
         } catch (Exception e) {
-            log.error("Error during tech blog scrap job execution", e);
+            log.error("Error during post scrap job execution", e);
         }
     }
 }
