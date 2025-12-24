@@ -2,7 +2,7 @@ package com.techpost.appbatch.domain.techblogscrap.scraper.impl;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.techpost.appbatch.domain.techblogscrap.enums.TechBlogScrapEnum;
+import com.techpost.appbatch.domain.techblogscrap.enums.PublisherScrapEnum;
 import com.techpost.appbatch.domain.techblogscrap.json.KakaoJsonData;
 import com.techpost.appbatch.domain.techblogscrap.scraper.TechBlogScraper;
 import com.techpost.domain.post.entity.Post;
@@ -17,7 +17,7 @@ import java.util.List;
 public class KakaoTechBlogScraper extends TechBlogScraper {
 
     public KakaoTechBlogScraper(ObjectMapper objectMapper) {
-        super(TechBlogScrapEnum.KAKAO, objectMapper);
+        super(PublisherScrapEnum.KAKAO, objectMapper);
     }
 
     @Override
@@ -27,7 +27,7 @@ public class KakaoTechBlogScraper extends TechBlogScraper {
             return parsePosts(jsonData);
         } catch (IOException e) {
             // TODO: 오류를 보완하자
-            throw new RuntimeException("Failed to extract JSON data from blog URL: " + techBlogScrapEnum.getBlogUrl(), e);
+            throw new RuntimeException("Failed to extract JSON data from blog URL: " + publisherScrapEnum.getBlogUrl(), e);
         }
     }
 

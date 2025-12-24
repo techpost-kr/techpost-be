@@ -11,7 +11,7 @@ import java.util.Arrays;
 
 @Getter
 @AllArgsConstructor
-public enum TechBlogScrapEnum {
+public enum PublisherScrapEnum {
 
     KAKAO(Publisher.KAKAO, "https://tech.kakao.com/api/v1/posts/no-offset?categoryCode=blog&lastSeq=0&firstSeq=0", "https://tech.kakao.com/posts/%s", KakaoTechBlogScraper.class),
     NAVER(Publisher.NAVER, "https://d2.naver.com/api/v1/contents?categoryId=2&page=0&size=10", "https://d2.naver.com%s", NaverTechBlogScraper.class),
@@ -26,8 +26,8 @@ public enum TechBlogScrapEnum {
         return String.format(this.postUrlFormat, postNumber);
     }
 
-    public static TechBlogScrapEnum findByTechBlogScraperClass(Class<? extends TechBlogScraper> techBlogScraperClass) {
-        return Arrays.stream(TechBlogScrapEnum.values())
+    public static PublisherScrapEnum findByTechBlogScraperClass(Class<? extends TechBlogScraper> techBlogScraperClass) {
+        return Arrays.stream(PublisherScrapEnum.values())
                 .filter(scrapEnum -> scrapEnum.getTechBlogScraperClass().equals(techBlogScraperClass))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("No matching TechBlogScrapEnum found for class: " + techBlogScraperClass.getName()));

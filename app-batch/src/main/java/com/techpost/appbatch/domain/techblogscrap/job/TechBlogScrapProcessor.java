@@ -1,6 +1,6 @@
 package com.techpost.appbatch.domain.techblogscrap.job;
 
-import com.techpost.appbatch.domain.techblogscrap.enums.TechBlogScrapEnum;
+import com.techpost.appbatch.domain.techblogscrap.enums.PublisherScrapEnum;
 import com.techpost.appbatch.domain.techblogscrap.scraper.TechBlogScraper;
 import com.techpost.appbatch.domain.techblogscrap.scraper.TechBlogScraperFactory;
 import com.techpost.domain.slack.entity.repository.SlackWebhookRepository;
@@ -13,7 +13,7 @@ import com.techpost.slack.webhook.dto.SlackWebhookRequest;
 import jakarta.annotation.Nonnull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.batch.item.ItemProcessor;
+import org.springframework.batch.infrastructure.item.ItemProcessor;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-public class TechBlogScrapProcessor implements ItemProcessor<TechBlogScrapEnum, List<Post>> {
+public class TechBlogScrapProcessor implements ItemProcessor<PublisherScrapEnum, List<Post>> {
 
     private final TechBlogScraperFactory techBlogScraperFactory;
 
@@ -34,11 +34,11 @@ public class TechBlogScrapProcessor implements ItemProcessor<TechBlogScrapEnum, 
     private final SlackWebhookRepository slackWebhookRepository;
 
     @Override
-    public List<Post> process(@Nonnull TechBlogScrapEnum techBlogScrapEnum) {
+    public List<Post> process(@Nonnull PublisherScrapEnum publisherScrapEnum) {
 
         log.info("start scrap process");
 
-        List<Post> posts = scrap(techBlogScrapEnum);
+        List<Post> posts = scrap(publisherScrapEnum);
 
         sendSlackWebhook(posts);
 
@@ -46,14 +46,14 @@ public class TechBlogScrapProcessor implements ItemProcessor<TechBlogScrapEnum, 
 
     }
 
-    private List<Post> scrap(TechBlogScrapEnum techBlogScrapEnum) {
-        TechBlogScraper techBlogScraper = techBlogScraperFactory.getTechBlogScraper(techBlogScrapEnum);
+    private List<Post> scrap(PublisherScrapEnum publisherScrapEnum) {
+        TechBlogScraper techBlogScraper = techBlogScraperFactory.getTechBlogScraper(publisherScrapEnum);
 
         List<Post> posts = techBlogScraper.scrap();
 
         if (CollectionUtils.isEmpty(posts)) return Collections.emptyList();
 
-        Set<String> urlSet = getUrlSet(techBlogScrapEnum.getPublisher());
+        Set<String> urlSet = getUrlSet(publisherScrapEnum.getPublisher());
 
         return posts.stream()
                 .filter(techBlogPost -> !urlSet.contains(techBlogPost.getUrl()))
@@ -62,7 +62,7 @@ public class TechBlogScrapProcessor implements ItemProcessor<TechBlogScrapEnum, 
 
     // url 기준으로 동일 데이터에 대해서 필터처리
     private Set<String> getUrlSet(Publisher publisher) {
-        return postRepository.findByTechBlogEnum(publisher).stream()
+        return postRepository.findByPublisher(publisher).stream()
                 .map(Post::getUrl)
                 .collect(Collectors.toSet());
     }

@@ -1,7 +1,7 @@
 package com.techpost.appbatch.domain.techblogscrap.json;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.techpost.appbatch.domain.techblogscrap.enums.TechBlogScrapEnum;
+import com.techpost.appbatch.domain.techblogscrap.enums.PublisherScrapEnum;
 import com.techpost.domain.post.entity.Post;
 import lombok.Getter;
 import lombok.Setter;
@@ -41,9 +41,9 @@ public class KakaoJsonData {
             private String thumbnailUri;
 
             private Post toPost() {
-                return Post.of(TechBlogScrapEnum.KAKAO.getPublisher(),
+                return Post.of(PublisherScrapEnum.KAKAO.getPublisher(),
                         this.title,
-                        TechBlogScrapEnum.KAKAO.getPostUrl(String.valueOf(this.id)),
+                        PublisherScrapEnum.KAKAO.getPostUrl(String.valueOf(this.id)),
                         this.releaseDateTime);
             }
 

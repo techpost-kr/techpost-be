@@ -1,6 +1,6 @@
 package com.techpost.appbatch.domain.techblogscrap.json;
 
-import com.techpost.appbatch.domain.techblogscrap.enums.TechBlogScrapEnum;
+import com.techpost.appbatch.domain.techblogscrap.enums.PublisherScrapEnum;
 import com.techpost.domain.post.entity.Post;
 import lombok.Getter;
 import lombok.Setter;
@@ -32,9 +32,9 @@ public class NaverJsonData {
         private String url;
 
         private Post toPost() {
-            return Post.of(TechBlogScrapEnum.NAVER.getPublisher(),
+            return Post.of(PublisherScrapEnum.NAVER.getPublisher(),
                     this.postTitle,
-                    TechBlogScrapEnum.NAVER.getPostUrl(this.url),
+                    PublisherScrapEnum.NAVER.getPostUrl(this.url),
                     toPublishedDateTime());
         }
 

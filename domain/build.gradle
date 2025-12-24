@@ -7,15 +7,14 @@ dependencyManagement {
 
 dependencies {
     implementation project(':common')
-    runtimeOnly 'com.mysql:mysql-connector-j'
     implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
     implementation 'io.jsonwebtoken:jjwt-impl:0.11.5'
     implementation 'io.jsonwebtoken:jjwt-jackson:0.11.5'
     implementation 'org.springframework.security:spring-security-crypto'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 
-    // todo: domain module 에서 infra module 분리할 때, 이동 고민
-    implementation 'io.awspring.cloud:spring-cloud-aws-starter-secrets-manager:3.1.0'
+    runtimeOnly 'org.postgresql:postgresql'
+
     testImplementation 'org.junit.jupiter:junit-jupiter'
 }
 apply from: '../querydsl.gradle'

@@ -1,11 +1,6 @@
 spring:
-  config:
-    import: aws-secretsmanager:dev/techpost/mysql
   datasource:
-    url: jdbc:mysql://${host}:${port}/techpost_dev
-    username: ${username}
-    password: ${password}
-
-aws:
-  region: ap-northeast-2
-
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/techpost_dev
+    username: postgres # TODO: change username and password for local setup
+    password: postgres # TODO: change username and password for local setup

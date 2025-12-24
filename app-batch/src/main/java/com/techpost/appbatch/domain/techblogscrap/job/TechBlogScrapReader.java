@@ -1,6 +1,6 @@
 package com.techpost.appbatch.domain.techblogscrap.job;
 
-import com.techpost.appbatch.domain.techblogscrap.enums.TechBlogScrapEnum;
+import com.techpost.appbatch.domain.techblogscrap.enums.PublisherScrapEnum;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,17 +16,17 @@ import java.util.Queue;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-public class TechBlogScrapReader implements ItemReader<TechBlogScrapEnum>, StepExecutionListener {
+public class TechBlogScrapReader implements ItemReader<PublisherScrapEnum>, StepExecutionListener {
 
-    private Queue<TechBlogScrapEnum> techBlogQueue;
+    private Queue<PublisherScrapEnum> techBlogQueue;
 
     @Override
     public void beforeStep(@NonNull StepExecution stepExecution) {
-        techBlogQueue = new LinkedList<>(EnumSet.allOf(TechBlogScrapEnum.class));
+        techBlogQueue = new LinkedList<>(EnumSet.allOf(PublisherScrapEnum.class));
     }
 
     @Override
-    public TechBlogScrapEnum read() {
+    public PublisherScrapEnum read() {
 
         log.info("start scrap reader");
 

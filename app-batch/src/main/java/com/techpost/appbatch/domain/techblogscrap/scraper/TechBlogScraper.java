@@ -2,7 +2,7 @@ package com.techpost.appbatch.domain.techblogscrap.scraper;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.techpost.appbatch.domain.techblogscrap.enums.TechBlogScrapEnum;
+import com.techpost.appbatch.domain.techblogscrap.enums.PublisherScrapEnum;
 import com.techpost.domain.post.entity.Post;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
@@ -12,11 +12,11 @@ import java.util.List;
 
 public abstract class TechBlogScraper {
 
-    protected TechBlogScrapEnum techBlogScrapEnum;
+    protected PublisherScrapEnum publisherScrapEnum;
     protected ObjectMapper objectMapper;
 
-    protected TechBlogScraper(TechBlogScrapEnum techBlogScrapEnum, ObjectMapper objectMapper) {
-        this.techBlogScrapEnum = techBlogScrapEnum;
+    protected TechBlogScraper(PublisherScrapEnum publisherScrapEnum, ObjectMapper objectMapper) {
+        this.publisherScrapEnum = publisherScrapEnum;
         this.objectMapper = objectMapper;
     }
 
@@ -26,7 +26,7 @@ public abstract class TechBlogScraper {
 
     protected String extractJsonData() throws IOException {
         return WebClient.builder()
-                .baseUrl(techBlogScrapEnum.getBlogUrl()) // 기본 베이스 URL 설정
+                .baseUrl(publisherScrapEnum.getBlogUrl()) // 기본 베이스 URL 설정
                 .build()
                 .get() // GET 요청 설정
                 .retrieve() // HTTP 응답을 받아옴

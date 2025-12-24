@@ -1,13 +1,13 @@
 package com.techpost.appbatch.domain.techblogscrap.job;
 
 import com.techpost.appbatch.common.constant.JobConstants;
-import com.techpost.appbatch.domain.techblogscrap.enums.TechBlogScrapEnum;
+import com.techpost.appbatch.domain.techblogscrap.enums.PublisherScrapEnum;
 import com.techpost.domain.post.entity.Post;
 import lombok.RequiredArgsConstructor;
-import org.springframework.batch.core.Job;
-import org.springframework.batch.core.Step;
+import org.springframework.batch.core.job.Job;
 import org.springframework.batch.core.job.builder.JobBuilder;
 import org.springframework.batch.core.repository.JobRepository;
+import org.springframework.batch.core.step.Step;
 import org.springframework.batch.core.step.builder.StepBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -36,7 +36,7 @@ public class TechBlogScrapJobConfig {
     @Bean
     public Step techBlogScrapJobStep1() {
         return new StepBuilder("techBlogScrapJobStep1", jobRepository)
-                .<TechBlogScrapEnum, List<Post>>chunk(1, platformTransactionManager)
+                .<PublisherScrapEnum, List<Post>>chunk(1, platformTransactionManager)
                 .reader(reader)
                 .processor(processor)
                 .writer(writer)
