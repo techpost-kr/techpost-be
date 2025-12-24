@@ -1,6 +1,6 @@
 create table posts
 (
-    postSeq   bigint auto_increment comment '기술 블로그 게시글 순번',
+    postId   bigint auto_increment comment '기술 블로그 게시글 순번',
     publisher      varchar(30) comment '블로그 출처 구분',
     title             varchar(400) comment '게시글 제목',
     url               varchar(400) comment '원문 URL',
@@ -9,7 +9,7 @@ create table posts
     createdDateTime   datetime default current_timestamp comment '생성 일시',
     modifiedBy        bigint comment '수정자',
     modifiedDateTime  datetime default current_timestamp on update current_timestamp comment '수정 일시',
-    primary key (postSeq)
+    primary key (postId)
 ) comment = '기술 블로그 게시글';
 
 

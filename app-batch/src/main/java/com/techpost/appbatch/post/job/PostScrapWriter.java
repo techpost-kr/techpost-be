@@ -1,7 +1,7 @@
 package com.techpost.appbatch.post.job;
 
-import com.techpost.domain.post.entity.Post;
-import com.techpost.domain.post.repository.PostRepository;
+import com.techpost.common.post.entity.Post;
+import com.techpost.common.post.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.infrastructure.item.Chunk;

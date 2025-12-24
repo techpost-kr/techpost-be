@@ -1,4 +1,4 @@
-package com.techpost.appapi.post.adapter.out.persistence;
+package com.techpost.appapi.post.adapter.out.persistence.entity;
 
 
 import com.techpost.appapi.common.constant.TableConstants;
@@ -22,7 +22,7 @@ public class PostJpaEntity extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long postSeq;
+    private Long postId;
 
     @Column
     @Enumerated(EnumType.STRING)
@@ -35,17 +35,17 @@ public class PostJpaEntity extends BaseEntity {
     private String url;
 
     @Column
-    private LocalDateTime publishedDateTime;
+    private LocalDateTime publishedAt;
 
     public static PostJpaEntity of(Publisher publisher,
                                    String title,
                                    String url,
-                                   LocalDateTime publishedDateTime) {
+                                   LocalDateTime publishedAt) {
         return PostJpaEntity.builder()
                 .publisher(publisher)
                 .title(title)
                 .url(url)
-                .publishedDateTime(publishedDateTime)
+                .publishedAt(publishedAt)
                 .build();
     }
 }

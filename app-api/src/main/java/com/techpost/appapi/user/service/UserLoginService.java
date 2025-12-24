@@ -1,6 +1,6 @@
 package com.techpost.appapi.user.service;
 
-import com.techpost.domain.common.PasswordUtils;
+import com.techpost.appapi.common.PasswordUtils;
 import com.techpost.common.response.enums.ApiResponseEnum;
 import com.techpost.common.response.exception.ApiResponseException;
 import com.techpost.appapi.user.dto.param.UserLoginParam;

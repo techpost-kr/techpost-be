@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @Builder
 public class Post {
 
-    private Long postSeq;
+    private Long postId;
 
     private Publisher publisher; // 발행처
 
@@ -23,17 +23,17 @@ public class Post {
 
     private String url;
 
-    private LocalDateTime publishedDateTime;
+    private LocalDateTime publishedAt;
 
     public static Post of(Publisher publisher,
                           String title,
                           String url,
-                          LocalDateTime publishedDateTime) {
+                          LocalDateTime publishedAt) {
         return Post.builder()
                 .publisher(publisher)
                 .title(title)
                 .url(url)
-                .publishedDateTime(publishedDateTime)
+                .publishedAt(publishedAt)
                 .build();
     }
 }

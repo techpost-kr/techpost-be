@@ -3,7 +3,7 @@ package com.techpost.appbatch.post.enums;
 import com.techpost.appbatch.post.scraper.PostScraper;
 import com.techpost.appbatch.post.scraper.impl.KakaoPostScraper;
 import com.techpost.appbatch.post.scraper.impl.NaverPostScraper;
-import com.techpost.domain.post.enums.Publisher;
+import com.techpost.common.post.enums.Publisher;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

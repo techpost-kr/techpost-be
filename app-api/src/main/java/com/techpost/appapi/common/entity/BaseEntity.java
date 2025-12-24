@@ -23,7 +23,7 @@ public abstract class BaseEntity {
 
     @CreatedDate
     @Column
-    protected LocalDateTime createdDateTime;
+    protected LocalDateTime createdAt;
 
     @LastModifiedBy
     @Column
@@ -31,6 +31,6 @@ public abstract class BaseEntity {
 
     @LastModifiedDate
     @Column
-    protected LocalDateTime modifiedDateTime;
+    protected LocalDateTime modifiedAt;
 
 }

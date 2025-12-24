@@ -1,6 +1,6 @@
-package com.techpost.domain;
+package com.techpost.common;
 
-import com.techpost.domain.common.PasswordUtils;
+import com.techpost.common.common.PasswordUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

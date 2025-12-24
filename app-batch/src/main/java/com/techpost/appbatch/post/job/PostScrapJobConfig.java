@@ -2,7 +2,7 @@ package com.techpost.appbatch.post.job;
 
 import com.techpost.appbatch.common.constant.JobConstants;
 import com.techpost.appbatch.post.enums.PublisherScrapEnum;
-import com.techpost.domain.post.entity.Post;
+import com.techpost.common.post.entity.Post;
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.job.Job;
 import org.springframework.batch.core.job.builder.JobBuilder;

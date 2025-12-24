@@ -1,4 +1,4 @@
-package com.techpost.appapi.common.dto.request;
+package com.techpost.appapi.common.dto.page;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
@@ -24,7 +24,4 @@ public class PageRequest {
         this.pageSize = pageSize;
     }
 
-    public Pageable toPageable() {
-        return org.springframework.data.domain.PageRequest.of(this.pageNumber, this.pageSize, Sort.unsorted());
-    }
 }
