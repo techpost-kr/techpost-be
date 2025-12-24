@@ -80,7 +80,7 @@ public class PostScrapProcessor implements ItemProcessor<PublisherScrapEnum, Lis
     }
 
     private String getUrl() {
-        return slackWebhookRepository.findBySlackWebhookEnum(SlackWebhookEnum.TECH_BLOG_SCRAP)
+        return slackWebhookRepository.findBySlackWebhookEnum(SlackWebhookEnum.POST_SCRAP)
                 .orElseThrow(RuntimeException::new)
                 .getUrl();
     }

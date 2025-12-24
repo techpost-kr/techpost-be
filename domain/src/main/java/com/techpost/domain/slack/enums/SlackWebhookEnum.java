@@ -4,5 +4,5 @@ import lombok.Getter;
 
 @Getter
 public enum SlackWebhookEnum {
-    TECH_BLOG_SCRAP
+    POST_SCRAP
 }

@@ -1,6 +1,6 @@
 CREATE TABLE posts
 (
-    postseq   bigint(20) NOT NULL primary key,
+    post_seq   bigint(20) NOT NULL primary key,
     publisher      enum ('KAKAO','NAVER','WOOWAHAN') DEFAULT NULL,
     title             varchar(255)                      DEFAULT NULL,
     url               varchar(255)                      DEFAULT NULL,
