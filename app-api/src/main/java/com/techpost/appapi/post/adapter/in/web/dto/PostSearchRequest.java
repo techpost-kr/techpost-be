@@ -1,31 +1,33 @@
 package com.techpost.appapi.post.adapter.in.web.dto;
 
-import com.techpost.appapi.common.dto.page.PageRequest;
+import com.techpost.appapi.common.page.adapter.PageRequest;
+import com.techpost.appapi.common.page.application.PageQuery;
 import com.techpost.appapi.post.application.port.in.postsearch.PostSearchQuery;
 import lombok.Getter;
 
+/**
+ * 게시물 검색 요청
+ */
 @Getter
 public class PostSearchRequest extends PageRequest {
 
-    private final String query;
+    private final String keyword;
 
-    protected PostSearchRequest(
-            Integer pageNumber,
-            Integer pageSize,
-            String query) {
-        super(pageNumber, pageSize);
-
-        this.query = query;
+    public PostSearchRequest(
+            Integer page,
+            Integer size,
+            String keyword) {
+        super(page, size);
+        this.keyword = keyword;
     }
 
-    /**
-     * Request -> Query 변환 (헥사고날 아키텍처)
-     */
     public PostSearchQuery toPostSearchQuery() {
         return PostSearchQuery.of(
-                this.query,
-                this.getPageNumber(),
-                this.getPageSize()
+                this.keyword,
+                PageQuery.of(
+                        super.page - 1,   // 1-based → 0-based
+                        super.size
+                )
         );
     }
 }
