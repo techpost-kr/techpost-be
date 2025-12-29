@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "SlackWebhooks")
+@Table(name = "slack_webhooks")
 public class SlackWebhook {
 
     @Id
@@ -33,13 +33,13 @@ public class SlackWebhook {
     private Long createdBy;
 
     @Column
-    private LocalDateTime createdDate;
+    private LocalDateTime createdAt;
 
     @Column
     private Long modifiedBy;
 
     @Column
-    private LocalDateTime modifiedDate;
+    private LocalDateTime modifiedAt;
 
 
 }

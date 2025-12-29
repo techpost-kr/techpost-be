@@ -30,7 +30,7 @@ public class UserLoginService {
         validateUser(user, param.getPassword());
 
         // 3. JWT 토큰 발행
-        String token = jwtGenerator.generate(user.getUserSeq().toString());
+        String token = jwtGenerator.generate(user.getUserId().toString());
 
         // 4. 사용자 로그인 상태 갱신
         user.login();

@@ -20,7 +20,7 @@ public class User extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userSeq;
+    private Long userId;
 
     @Column
     private String id;
@@ -43,16 +43,16 @@ public class User extends BaseEntity {
     private String lastLoginIp;
 
     @Column
-    private LocalDateTime lastLoginDateTime;
+    private LocalDateTime lastLoginAt;
 
     @Column
-    private LocalDateTime lastPasswordChangeDateTime;
+    private LocalDateTime lastPasswordChangeAt;
 
     @Column
     private Integer failedLoginAttempts; // 로그인 실패 횟수
 
     public void login() {
-        this.lastLoginDateTime = LocalDateTime.now();
+        this.lastLoginAt = LocalDateTime.now();
         this.failedLoginAttempts = 0;
         this.lastLoginIp = "127.0.0.1"; // TODO: 수정하자.
     }

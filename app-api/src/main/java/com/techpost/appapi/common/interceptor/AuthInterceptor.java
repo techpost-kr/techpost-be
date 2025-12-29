@@ -13,7 +13,7 @@ public class AuthInterceptor implements HandlerInterceptor {
 
     private final Set<String> excludedUrls = Set.of(
             "/user/login",
-            "/tech-blog-post"
+            "/post"
     );
 
     private final AntPathMatcher pathMatcher = new AntPathMatcher();

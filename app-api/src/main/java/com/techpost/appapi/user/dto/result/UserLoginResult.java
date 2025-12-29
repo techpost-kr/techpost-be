@@ -21,7 +21,7 @@ public class UserLoginResult {
 
     public static UserLoginResult of(User user, String token) {
         return new UserLoginResult(
-                user.getUserSeq(),
+                user.getUserId(),
                 user.getName(),
                 user.getUserRoleEnum(),
                 token);
