@@ -1,8 +1,8 @@
-package com.techpost.appbatch.post.enums;
+package com.techpost.appbatch.post.scrap.enums;
 
-import com.techpost.appbatch.post.scraper.PostScraper;
-import com.techpost.appbatch.post.scraper.impl.KakaoPostScraper;
-import com.techpost.appbatch.post.scraper.impl.NaverPostScraper;
+import com.techpost.appbatch.post.scrap.scraper.PostScraper;
+import com.techpost.appbatch.post.scrap.scraper.impl.KakaoPostScraper;
+import com.techpost.appbatch.post.scrap.scraper.impl.NaverPostScraper;
 import com.techpost.common.post.enums.Publisher;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,7 +1,10 @@
-package com.techpost.appbatch.post.job;
+package com.techpost.appbatch.post.scrap.job;
 
 import com.techpost.appbatch.common.constant.JobConstants;
-import com.techpost.appbatch.post.enums.PublisherScrapEnum;
+import com.techpost.appbatch.post.scrap.enums.PublisherScrapEnum;
+import com.techpost.appbatch.post.scrap.step.PostScrapProcessor;
+import com.techpost.appbatch.post.scrap.step.PostScrapReader;
+import com.techpost.appbatch.post.scrap.step.PostScrapWriter;
 import com.techpost.common.post.entity.Post;
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.job.Job;

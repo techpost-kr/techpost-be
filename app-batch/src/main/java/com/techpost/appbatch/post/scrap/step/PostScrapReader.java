@@ -1,6 +1,6 @@
-package com.techpost.appbatch.post.job;
+package com.techpost.appbatch.post.scrap.step;
 
-import com.techpost.appbatch.post.enums.PublisherScrapEnum;
+import com.techpost.appbatch.post.scrap.enums.PublisherScrapEnum;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

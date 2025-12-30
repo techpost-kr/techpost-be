@@ -1,8 +1,8 @@
-package com.techpost.appbatch.post.job;
+package com.techpost.appbatch.post.scrap.step;
 
-import com.techpost.appbatch.post.enums.PublisherScrapEnum;
-import com.techpost.appbatch.post.scraper.PostScraper;
-import com.techpost.appbatch.post.scraper.PostScraperFactory;
+import com.techpost.appbatch.post.scrap.enums.PublisherScrapEnum;
+import com.techpost.appbatch.post.scrap.scraper.PostScraper;
+import com.techpost.appbatch.post.scrap.scraper.PostScraperFactory;
 import com.techpost.common.slack.entity.repository.SlackWebhookRepository;
 import com.techpost.common.slack.enums.SlackWebhookEnum;
 import com.techpost.common.post.entity.Post;

@@ -1,10 +1,10 @@
-package com.techpost.appbatch.post.scraper.impl;
+package com.techpost.appbatch.post.scrap.scraper.impl;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.techpost.appbatch.post.enums.PublisherScrapEnum;
-import com.techpost.appbatch.post.json.KakaoJsonData;
-import com.techpost.appbatch.post.scraper.PostScraper;
+import com.techpost.appbatch.post.scrap.enums.PublisherScrapEnum;
+import com.techpost.appbatch.post.scrap.json.KakaoJsonData;
+import com.techpost.appbatch.post.scrap.scraper.PostScraper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 

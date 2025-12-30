@@ -1,6 +1,6 @@
-package com.techpost.appbatch.post.scraper;
+package com.techpost.appbatch.post.scrap.scraper;
 
-import com.techpost.appbatch.post.enums.PublisherScrapEnum;
+import com.techpost.appbatch.post.scrap.enums.PublisherScrapEnum;
 import org.springframework.stereotype.Component;
 
 import java.util.EnumMap;

@@ -1,4 +1,4 @@
-package com.techpost.appbatch.post.job;
+package com.techpost.appbatch.post.scrap.step;
 
 import com.techpost.common.post.entity.Post;
 import com.techpost.common.post.repository.PostRepository;

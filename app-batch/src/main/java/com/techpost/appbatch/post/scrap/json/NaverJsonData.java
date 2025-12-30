@@ -1,6 +1,6 @@
-package com.techpost.appbatch.post.json;
+package com.techpost.appbatch.post.scrap.json;
 
-import com.techpost.appbatch.post.enums.PublisherScrapEnum;
+import com.techpost.appbatch.post.scrap.enums.PublisherScrapEnum;
 import com.techpost.common.post.entity.Post;
 import lombok.Getter;
 import lombok.Setter;
