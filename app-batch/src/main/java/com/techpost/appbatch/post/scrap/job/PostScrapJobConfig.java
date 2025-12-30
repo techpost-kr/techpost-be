@@ -39,10 +39,11 @@ public class PostScrapJobConfig {
     @Bean
     public Step postScrapJobStep1() {
         return new StepBuilder("postScrapJobStep1", jobRepository)
-                .<PublisherScrapEnum, List<Post>>chunk(1, platformTransactionManager)
+                .<PublisherScrapEnum, List<Post>>chunk(1)
                 .reader(reader)
                 .processor(processor)
                 .writer(writer)
+                .transactionManager(platformTransactionManager)
                 .build();
     }
 }
