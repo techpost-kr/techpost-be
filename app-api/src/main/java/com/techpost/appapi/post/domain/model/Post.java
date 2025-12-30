@@ -2,38 +2,38 @@ package com.techpost.appapi.post.domain.model;
 
 
 import com.techpost.appapi.post.domain.enums.Publisher;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
 @Getter
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
 public class Post {
 
-    private Long postId;
+    private final PostId postId;
 
-    private Publisher publisher; // 발행처
+    private final Publisher publisher; // 발행처
 
-    private String title;
+    private final String title;
 
-    private String url;
+    private final String url;
 
-    private LocalDateTime publishedAt;
+    private final LocalDateTime publishedAt;
+
+    private Post(Publisher publisher,
+                 String title,
+                 String url,
+                 LocalDateTime publishedAt) {
+        this.postId = PostId.of();
+        this.publisher = publisher;
+        this.title = title;
+        this.url = url;
+        this.publishedAt = publishedAt;
+    }
 
     public static Post of(Publisher publisher,
                           String title,
                           String url,
                           LocalDateTime publishedAt) {
-        return Post.builder()
-                .publisher(publisher)
-                .title(title)
-                .url(url)
-                .publishedAt(publishedAt)
-                .build();
+        return new Post(publisher, title, url, publishedAt);
     }
 }
