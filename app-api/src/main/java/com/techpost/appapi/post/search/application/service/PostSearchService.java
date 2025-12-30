@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
-public class PostSearchService implements PostSearchUseCase {
+class PostSearchService implements PostSearchUseCase {
 
     private final PostSearchPort postSearchPort;
 

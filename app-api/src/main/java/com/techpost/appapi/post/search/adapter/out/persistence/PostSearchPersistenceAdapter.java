@@ -24,7 +24,7 @@ import static com.techpost.appapi.post.adepter.out.persistence.entity.QPostJpaEn
  */
 @Component
 @RequiredArgsConstructor
-public class PostSearchPersistenceAdapter implements PostSearchPort {
+class PostSearchPersistenceAdapter implements PostSearchPort {
 
     private final JPAQueryFactory jpaQueryFactory;
 
