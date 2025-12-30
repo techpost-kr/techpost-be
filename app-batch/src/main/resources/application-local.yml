@@ -4,3 +4,8 @@ spring:
     url: jdbc:postgresql://localhost:5432/techpost_dev
     username: postgres # TODO: change username and password for local setup
     password: postgres # TODO: change username and password for local setup
+
+slack:
+  webhook:
+    url: ${SLACK_WEBHOOK_URL:https://hooks.slack.com/services/DUMMY_URL_FOR_LOCAL}
+

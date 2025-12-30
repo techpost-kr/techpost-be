@@ -12,6 +12,7 @@ import jakarta.annotation.Nonnull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.infrastructure.item.ItemProcessor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
@@ -28,7 +29,8 @@ public class PostScrapProcessor implements ItemProcessor<PublisherScrapEnum, Lis
     private final PostScraperFactory postScraperFactory;
     private final PostSearchPort postSearchPort;
 
-    private final static String SLACK_URL = "https://hooks.slack.com/services/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"; // TODO: 나중에 환경변수로 빼기
+    @Value("${slack.webhook.url}")
+    private String slackWebhookUrl;
 
     @Override
     public List<Post> process(@Nonnull PublisherScrapEnum publisherScrapEnum) {
@@ -65,11 +67,10 @@ public class PostScrapProcessor implements ItemProcessor<PublisherScrapEnum, Lis
     }
 
     private void sendSlackWebhook(List<Post> posts) {
-        // TODO: Slack 알림 로직 구현 필요
         for (Post post : posts) {
             try {
                 log.info("New post scraped: {} - {}", post.getTitle(), post.getUrl());
-                SlackWebhookClient.postMessage(SLACK_URL, createWebhookRequest(post));
+                SlackWebhookClient.postMessage(slackWebhookUrl, createWebhookRequest(post));
             } catch (RuntimeException e) {
                 log.error("Failed to send message for post: {}", post.getTitle(), e);
             }
