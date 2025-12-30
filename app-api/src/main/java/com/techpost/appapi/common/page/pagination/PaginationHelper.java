@@ -2,6 +2,8 @@ package com.techpost.appapi.common.page.pagination;
 
 import com.querydsl.jpa.impl.JPAQuery;
 import com.techpost.appapi.common.page.application.PageResult;
+import com.techpost.appapi.common.page.pagination.strategy.DefaultPaginationStrategy;
+import com.techpost.appapi.common.page.pagination.strategy.PaginationStrategy;
 import org.springframework.data.domain.Pageable;
 
 public final class PaginationHelper {
