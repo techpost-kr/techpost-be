@@ -4,9 +4,11 @@ plugins {
 }
 dependencies {
     implementation project(':common')
+    implementation project(':domain')
+    implementation project(':application')
+    implementation project(':infrastructure-jpa')
 
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-cache'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
@@ -15,14 +17,9 @@ dependencies {
     implementation 'io.jsonwebtoken:jjwt-impl:0.11.5'
     implementation 'io.jsonwebtoken:jjwt-jackson:0.11.5'
     implementation 'org.springframework.security:spring-security-crypto'
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 
     runtimeOnly 'org.postgresql:postgresql'
 
-    testImplementation 'org.junit.jupiter:junit-jupiter'
-
-    // Jakarta Persistence
-    implementation 'jakarta.persistence:jakarta.persistence-api'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
@@ -30,4 +27,3 @@ dependencies {
 bootJar { enabled = true }
 jar { enabled = false }
 
-apply from: '../querydsl.gradle'

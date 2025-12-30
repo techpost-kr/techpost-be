@@ -1,7 +1,7 @@
 package com.techpost.appbatch.post.scrap.json;
 
 import com.techpost.appbatch.post.scrap.enums.PublisherScrapEnum;
-import com.techpost.common.post.entity.Post;
+import com.techpost.domain.post.model.Post;
 import lombok.Getter;
 import lombok.Setter;
 

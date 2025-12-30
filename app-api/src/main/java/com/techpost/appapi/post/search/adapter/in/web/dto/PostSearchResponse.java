@@ -1,6 +1,6 @@
 package com.techpost.appapi.post.search.adapter.in.web.dto;
 
-import com.techpost.appapi.post.search.application.port.in.PostSearchResult;
+import com.techpost.application.post.port.in.PostSearchResult;
 
 import java.time.LocalDateTime;
 

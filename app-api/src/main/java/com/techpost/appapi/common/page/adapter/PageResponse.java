@@ -1,6 +1,6 @@
 package com.techpost.appapi.common.page.adapter;
 
-import com.techpost.appapi.common.page.application.PageResult;
+import com.techpost.application.common.page.PageResult;
 import lombok.Getter;
 
 import java.util.List;

@@ -5,10 +5,6 @@ spring:
   application:
     name: 'app-batch'
 
-  config:
-    import:
-      - "classpath:application-domain.yml"
-
   batch:
     jdbc:
       initialize-schema: always

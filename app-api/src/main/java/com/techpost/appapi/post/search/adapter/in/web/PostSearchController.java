@@ -1,13 +1,13 @@
 package com.techpost.appapi.post.search.adapter.in.web;
 
 import com.techpost.appapi.common.page.adapter.PageResponse;
-import com.techpost.appapi.common.page.application.PageResult;
 import com.techpost.appapi.post.search.adapter.in.web.dto.PostSearchRequest;
 import com.techpost.appapi.post.search.adapter.in.web.dto.PostSearchResponse;
-import com.techpost.appapi.post.search.application.port.in.PostSearchQuery;
-import com.techpost.appapi.post.search.application.port.in.PostSearchResult;
-import com.techpost.appapi.post.search.application.port.in.PostSearchUseCase;
 import com.techpost.common.response.ApiResponse;
+import com.techpost.application.common.page.PageResult;
+import com.techpost.application.post.port.in.PostSearchQuery;
+import com.techpost.application.post.port.in.PostSearchResult;
+import com.techpost.application.post.port.in.PostSearchUseCase;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

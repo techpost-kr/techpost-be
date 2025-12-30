@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.techpost.appbatch.post.scrap.enums.PublisherScrapEnum;
 import com.techpost.appbatch.post.scrap.json.KakaoJsonData;
 import com.techpost.appbatch.post.scrap.scraper.PostScraper;
+import com.techpost.domain.post.model.Post;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 

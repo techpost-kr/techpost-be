@@ -3,11 +3,9 @@ package com.techpost.appbatch.post.scrap.step;
 import com.techpost.appbatch.post.scrap.enums.PublisherScrapEnum;
 import com.techpost.appbatch.post.scrap.scraper.PostScraper;
 import com.techpost.appbatch.post.scrap.scraper.PostScraperFactory;
-import com.techpost.common.slack.entity.repository.SlackWebhookRepository;
-import com.techpost.common.slack.enums.SlackWebhookEnum;
-import com.techpost.common.post.entity.Post;
-import com.techpost.common.post.enums.Publisher;
-import com.techpost.common.post.repository.PostRepository;
+import com.techpost.application.post.port.out.PostSearchPort;
+import com.techpost.domain.post.model.Post;
+import com.techpost.domain.post.model.Publisher;
 import com.techpost.slack.webhook.SlackWebhookClient;
 import com.techpost.slack.webhook.dto.SlackWebhookRequest;
 import jakarta.annotation.Nonnull;
@@ -28,10 +26,9 @@ import java.util.stream.Collectors;
 public class PostScrapProcessor implements ItemProcessor<PublisherScrapEnum, List<Post>> {
 
     private final PostScraperFactory postScraperFactory;
+    private final PostSearchPort postSearchPort;
 
-    private final PostRepository postRepository;
-
-    private final SlackWebhookRepository slackWebhookRepository;
+    private final static String SLACK_URL = "https://hooks.slack.com/services/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"; // TODO: 나중에 환경변수로 빼기
 
     @Override
     public List<Post> process(@Nonnull PublisherScrapEnum publisherScrapEnum) {
@@ -40,10 +37,10 @@ public class PostScrapProcessor implements ItemProcessor<PublisherScrapEnum, Lis
 
         List<Post> posts = scrap(publisherScrapEnum);
 
+        // Slack 알림 전송
         sendSlackWebhook(posts);
 
         return posts;
-
     }
 
     private List<Post> scrap(PublisherScrapEnum publisherScrapEnum) {
@@ -62,27 +59,21 @@ public class PostScrapProcessor implements ItemProcessor<PublisherScrapEnum, Lis
 
     // url 기준으로 동일 데이터에 대해서 필터처리
     private Set<String> getUrlSet(Publisher publisher) {
-        return postRepository.findByPublisher(publisher).stream()
+        return postSearchPort.searchByPublisher(publisher).stream()
                 .map(Post::getUrl)
                 .collect(Collectors.toSet());
     }
 
     private void sendSlackWebhook(List<Post> posts) {
-        String slackWebhookUrl = this.getUrl();
+        // TODO: Slack 알림 로직 구현 필요
         for (Post post : posts) {
             try {
-                SlackWebhookClient.postMessage(slackWebhookUrl, this.createWebhookRequest(post));
+                log.info("New post scraped: {} - {}", post.getTitle(), post.getUrl());
+                SlackWebhookClient.postMessage(SLACK_URL, createWebhookRequest(post));
             } catch (RuntimeException e) {
-                // 예외 발생 시 로깅
                 log.error("Failed to send message for post: {}", post.getTitle(), e);
             }
         }
-    }
-
-    private String getUrl() {
-        return slackWebhookRepository.findBySlackWebhookEnum(SlackWebhookEnum.POST_SCRAP)
-                .orElseThrow(RuntimeException::new)
-                .getUrl();
     }
 
     private SlackWebhookRequest createWebhookRequest(Post post) {

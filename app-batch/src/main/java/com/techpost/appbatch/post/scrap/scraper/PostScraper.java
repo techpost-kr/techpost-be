@@ -3,7 +3,7 @@ package com.techpost.appbatch.post.scrap.scraper;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.techpost.appbatch.post.scrap.enums.PublisherScrapEnum;
-import com.techpost.common.post.entity.Post;
+import com.techpost.domain.post.model.Post;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 

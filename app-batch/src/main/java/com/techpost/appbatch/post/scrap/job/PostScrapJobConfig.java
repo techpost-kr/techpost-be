@@ -5,7 +5,7 @@ import com.techpost.appbatch.post.scrap.enums.PublisherScrapEnum;
 import com.techpost.appbatch.post.scrap.step.PostScrapProcessor;
 import com.techpost.appbatch.post.scrap.step.PostScrapReader;
 import com.techpost.appbatch.post.scrap.step.PostScrapWriter;
-import com.techpost.common.post.entity.Post;
+import com.techpost.domain.post.model.Post;
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.job.Job;
 import org.springframework.batch.core.job.builder.JobBuilder;
