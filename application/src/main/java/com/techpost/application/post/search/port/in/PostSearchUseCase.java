@@ -1,4 +1,4 @@
-package com.techpost.application.post.port.in;
+package com.techpost.application.post.search.port.in;
 
 import com.techpost.application.common.page.PageResult;
 import com.techpost.domain.post.model.Publisher;

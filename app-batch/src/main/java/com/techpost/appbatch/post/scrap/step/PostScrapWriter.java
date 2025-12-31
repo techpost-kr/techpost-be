@@ -1,8 +1,8 @@
 package com.techpost.appbatch.post.scrap.step;
 
 import com.techpost.appbatch.post.scrap.dto.PostScrapDto;
-import com.techpost.application.post.port.in.PostSaveUseCase;
-import com.techpost.application.post.port.in.PostSaveCommand;
+import com.techpost.application.post.save.port.in.PostSaveUseCase;
+import com.techpost.application.post.save.port.in.PostSaveCommand;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.infrastructure.item.Chunk;

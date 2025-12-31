@@ -1,8 +1,8 @@
-package com.techpost.application.post.service;
+package com.techpost.application.post.save.service;
 
-import com.techpost.application.post.port.in.PostSaveUseCase;
-import com.techpost.application.post.port.in.PostSaveCommand;
-import com.techpost.application.post.port.out.PostSavePort;
+import com.techpost.application.post.save.port.in.PostSaveUseCase;
+import com.techpost.application.post.save.port.in.PostSaveCommand;
+import com.techpost.application.post.save.port.out.PostSavePort;
 import com.techpost.domain.post.model.Post;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

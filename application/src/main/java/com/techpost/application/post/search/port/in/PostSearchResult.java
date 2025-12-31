@@ -1,4 +1,4 @@
-package com.techpost.application.post.port.in;
+package com.techpost.application.post.search.port.in;
 
 import com.techpost.domain.post.model.Publisher;
 import lombok.AllArgsConstructor;

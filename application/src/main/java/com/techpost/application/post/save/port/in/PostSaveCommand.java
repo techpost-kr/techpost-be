@@ -1,4 +1,4 @@
-package com.techpost.application.post.port.in;
+package com.techpost.application.post.save.port.in;
 
 import com.techpost.domain.post.model.Post;
 import com.techpost.domain.post.model.Publisher;

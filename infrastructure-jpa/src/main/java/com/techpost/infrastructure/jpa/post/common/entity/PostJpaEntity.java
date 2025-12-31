@@ -1,4 +1,4 @@
-package com.techpost.infrastructure.jpa.post.entity;
+package com.techpost.infrastructure.jpa.post.common.entity;
 
 import com.techpost.domain.post.model.Publisher;
 import com.techpost.infrastructure.jpa.common.constant.TableConstants;

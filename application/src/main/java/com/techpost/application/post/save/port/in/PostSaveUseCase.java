@@ -1,4 +1,4 @@
-package com.techpost.application.post.port.in;
+package com.techpost.application.post.save.port.in;
 
 import java.util.List;
 

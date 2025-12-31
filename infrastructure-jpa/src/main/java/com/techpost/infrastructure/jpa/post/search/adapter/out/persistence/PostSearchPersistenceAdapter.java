@@ -1,4 +1,4 @@
-package com.techpost.infrastructure.jpa.post.adapter;
+package com.techpost.infrastructure.jpa.post.search.adapter.out.persistence;
 
 import com.querydsl.core.types.Expression;
 import com.querydsl.core.types.ExpressionUtils;
@@ -6,16 +6,13 @@ import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.techpost.application.common.page.PageResult;
-import com.techpost.application.post.port.in.PostSearchQuery;
-import com.techpost.application.post.port.in.PostSearchResult;
-import com.techpost.application.post.port.out.PostSearchPort;
-import com.techpost.application.post.port.out.PostSavePort;
-import com.techpost.domain.post.model.Post;
+import com.techpost.application.post.search.port.in.PostSearchQuery;
+import com.techpost.application.post.search.port.in.PostSearchResult;
+import com.techpost.application.post.search.port.out.PostSearchPort;
 import com.techpost.domain.post.model.Publisher;
 import com.techpost.infrastructure.jpa.common.util.PaginationHelper;
-import com.techpost.infrastructure.jpa.post.entity.PostJpaEntity;
-import com.techpost.infrastructure.jpa.post.mapper.PostEntityMapper;
-import com.techpost.infrastructure.jpa.post.repository.PostJpaRepository;
+import com.techpost.infrastructure.jpa.post.common.mapper.PostEntityMapper;
+import com.techpost.infrastructure.jpa.post.common.repository.PostJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -35,7 +32,7 @@ import static com.techpost.infrastructure.jpa.post.entity.QPostJpaEntity.postJpa
  */
 @Component
 @RequiredArgsConstructor
-public class PostPersistenceAdapter implements PostSearchPort, PostSavePort {
+public class PostSearchPersistenceAdapter implements PostSearchPort {
 
     private final PostJpaRepository postJpaRepository;
     private final JPAQueryFactory jpaQueryFactory;
@@ -65,26 +62,6 @@ public class PostPersistenceAdapter implements PostSearchPort, PostSavePort {
     public List<PostSearchResult> searchByPublisher(Publisher publisher) {
         return postJpaRepository.findByPublisher(publisher).stream()
                 .map(mapper::toSearchResult)
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    public Post save(Post post) {
-        PostJpaEntity entity = mapper.toEntity(post);
-        PostJpaEntity saved = postJpaRepository.save(entity);
-        return mapper.toDomain(saved);
-    }
-
-    @Override
-    public List<Post> saveAll(List<Post> posts) {
-        List<PostJpaEntity> entities = posts.stream()
-                .map(mapper::toEntity)
-                .collect(Collectors.toList());
-
-        List<PostJpaEntity> saved = postJpaRepository.saveAll(entities);
-
-        return saved.stream()
-                .map(mapper::toDomain)
                 .collect(Collectors.toList());
     }
 

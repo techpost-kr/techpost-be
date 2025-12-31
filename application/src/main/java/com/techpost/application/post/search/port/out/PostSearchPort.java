@@ -1,9 +1,8 @@
-package com.techpost.application.post.port.out;
+package com.techpost.application.post.search.port.out;
 
 import com.techpost.application.common.page.PageResult;
-import com.techpost.application.post.port.in.PostSearchQuery;
-import com.techpost.application.post.port.in.PostSearchResult;
-import com.techpost.domain.post.model.Post;
+import com.techpost.application.post.search.port.in.PostSearchQuery;
+import com.techpost.application.post.search.port.in.PostSearchResult;
 import com.techpost.domain.post.model.Publisher;
 
 import java.util.List;

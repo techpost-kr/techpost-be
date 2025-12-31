@@ -1,10 +1,10 @@
-package com.techpost.application.post.service;
+package com.techpost.application.post.search.service;
 
 import com.techpost.application.common.page.PageResult;
-import com.techpost.application.post.port.in.PostSearchQuery;
-import com.techpost.application.post.port.in.PostSearchResult;
-import com.techpost.application.post.port.in.PostSearchUseCase;
-import com.techpost.application.post.port.out.PostSearchPort;
+import com.techpost.application.post.search.port.in.PostSearchQuery;
+import com.techpost.application.post.search.port.in.PostSearchResult;
+import com.techpost.application.post.search.port.in.PostSearchUseCase;
+import com.techpost.application.post.search.port.out.PostSearchPort;
 import com.techpost.domain.post.model.Publisher;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

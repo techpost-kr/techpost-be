@@ -1,8 +1,8 @@
-package com.techpost.infrastructure.jpa.post.mapper;
+package com.techpost.infrastructure.jpa.post.common.mapper;
 
-import com.techpost.application.post.port.in.PostSearchResult;
+import com.techpost.application.post.search.port.in.PostSearchResult;
 import com.techpost.domain.post.model.Post;
-import com.techpost.infrastructure.jpa.post.entity.PostJpaEntity;
+import com.techpost.infrastructure.jpa.post.common.entity.PostJpaEntity;
 import org.springframework.stereotype.Component;
 
 /**

@@ -2,7 +2,7 @@ package com.techpost.appapi.post.search.adapter.in.web.dto;
 
 import com.techpost.appapi.common.page.adapter.PageRequest;
 import com.techpost.application.common.page.PageQuery;
-import com.techpost.application.post.port.in.PostSearchQuery;
+import com.techpost.application.post.search.port.in.PostSearchQuery;
 import lombok.Getter;
 
 /**

@@ -1,4 +1,4 @@
-package com.techpost.application.post.port.out;
+package com.techpost.application.post.save.port.out;
 
 import com.techpost.domain.post.model.Post;
 

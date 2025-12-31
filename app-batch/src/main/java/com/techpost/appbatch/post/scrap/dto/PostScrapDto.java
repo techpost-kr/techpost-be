@@ -1,6 +1,6 @@
 package com.techpost.appbatch.post.scrap.dto;
 
-import com.techpost.application.post.port.in.PostSaveCommand;
+import com.techpost.application.post.save.port.in.PostSaveCommand;
 import com.techpost.domain.post.model.Publisher;
 import lombok.Getter;
 
