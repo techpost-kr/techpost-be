@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 
 import static com.techpost.infrastructure.jpa.common.util.QuerydslUtils.contains;
 import static com.techpost.infrastructure.jpa.common.util.QuerydslUtils.eq;
-import static com.techpost.infrastructure.jpa.post.entity.QPostJpaEntity.postJpaEntity;
+import static com.techpost.infrastructure.jpa.post.common.entity.QPostJpaEntity.postJpaEntity;
 
 /**
  * Post 영속성 어댑터

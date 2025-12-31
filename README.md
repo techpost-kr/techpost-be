@@ -1,169 +1,59 @@
-# TechPost Backend
+# 🚀 TechPost Backend
 
-테크 블로그 포스트 관리 및 배치 처리를 위한 Spring Boot 멀티모듈 프로젝트입니다.
+> **헥사고날 아키텍처 기반의 테크 블로그 애그리게이션 플랫폼**
+> 
+> 국내 주요 테크 기업의 기술 블로그 포스트를 자동으로 수집하고 통합 제공하는 Spring Boot 멀티모듈 프로젝트
 
-## 📋 프로젝트 개요
+<br/>
 
-TechPost는 테크 블로그 포스트를 수집, 관리하고 사용자에게 제공하는 서비스입니다. 마이크로서비스 아키텍처를 지향하며 각 모듈이 독립적인 책임을 가지도록 설계되었습니다.
+## 📌 프로젝트 개요
+
+TechPost는 카카오, 네이버 등 국내 주요 IT 기업의 기술 블로그를 자동으로 스크래핑하여 한 곳에서 조회할 수 있는 애그리게이션 서비스입니다. **헥사고날 아키텍처**(Ports & Adapters)를 적용하여 비즈니스 로직과 인프라 계층을 완전히 분리했으며, **도메인 주도 설계(DDD)** 원칙을 따라 각 모듈이 명확한 책임을 가지도록 설계했습니다.
+
+<br/>
+
+### ✨ 주요 특징
+
+- 🏗️ **헥사고날 아키텍처**: 비즈니스 로직과 기술 세부사항의 완전한 분리
+- 📦 **멀티모듈 구조**: 행위 중심의 명확한 모듈 분리 (Search, Save 등)
+- 🔄 **자동화 배치**: Spring Batch 기반 주기적 데이터 수집
+- 🎯 **DDD 적용**: UseCase 중심의 명확한 비즈니스 로직 표현
+- 🔌 **의존성 역전**: Port/Adapter 패턴으로 결합도 최소화
+- 🧪 **테스트 용이성**: Mock 객체를 통한 독립적인 계층별 테스트 가능
+
+<br/>
+
+
+---
 
 ## 🏗️ 기술 스택
 
-- **Java**: 21
-- **Framework**: Spring Boot 3.3.3
-- **Build Tool**: Gradle
-- **Database**: MySQL (AWS RDS)
-- **ORM**: JPA/Hibernate, QueryDSL
-- **Batch**: Spring Batch, Quartz
+### Backend Core
+- **Language**: Java 25
+- **Framework**: Spring Boot 4.0.0
+- **Build Tool**: Gradle 9.2.1 (Multi-module)
+- **ORM**: Spring Data JPA, Hibernate 7.1.8
+- **Query DSL**: Querydsl 5.1.0 (Type-safe query)
+
+### Batch & Scheduling
+- **Spring Batch**: 6.0.0 (청크 기반 대용량 처리)
+- **Spring Quartz**: 스케줄링 관리
+- **WebFlux**: 비동기 HTTP 클라이언트 (외부 API 호출)
+
+### Database & Infrastructure
+- **RDBMS**: PostgreSQL (AWS RDS)
+- **Connection Pool**: HikariCP (최적화된 설정)
+
+### DevOps & Monitoring
+- **Container**: Docker
 - **Monitoring**: Spring Actuator
-- **Cloud**: AWS (Secrets Manager)
+- **Notification**: Slack Webhook
 
-## 📦 모듈 구조
+<br/>
 
-### 1. app-api
-- **역할**: 외부 클라이언트와의 인터페이스 담당. 클라이언트 요청을 처리하고 결과를 반환.
-- **포트**: 18010
-- **주요 기능**: 
-  - RESTful API 엔드포인트 제공
-  - `domain` 모듈을 이용해 비즈니스 로직 처리
-  - Controller 계층 포함
-  - API 유효성 검증
-  - 헬스체크 엔드포인트
-
-- **주요 의존성**:
-  - Spring Web, JPA, Validation, Cache, Actuator
-  - Jakarta Persistence API
-
-- **의존 관계**:
-  - `domain` 모듈에 의존
-  - `common` 모듈에 의존
 
 ---
 
-### 2. app-batch
-- **역할**: 배치 작업을 수행하는 모듈. 대량의 데이터를 처리하고 주기적 작업을 자동화.
-- **주요 기능**: 
-  - Spring Batch를 이용한 테크 블로그 스크랩 작업
-  - Quartz 스케줄러를 통한 주기적 배치 실행
-  - WebFlux를 통한 비동기 외부 API 호출
-  - 배치 잡 실행 및 관리
-  - 알림 발송 기능
-
-- **주요 의존성**:
-  - Spring Batch, Quartz, WebFlux
-  - Jackson (JSON 처리)
-  - H2 Database (테스트용)
-
-- **의존 관계**:
-  - `domain` 모듈에 의존 (데이터 처리 및 엔티티 관련 작업)
-  - `common` 모듈에 의존 (공통 유틸 및 설정 활용)
-  - `notification` 모듈에 의존 (알림 기능)
-
----
-
-### 3. domain
-- **역할**: 핵심 비즈니스 로직과 데이터 모델을 담당하는 모듈.
-- **주요 기능**:
-  - JPA 엔티티 클래스 및 Repository 계층
-  - 비즈니스 로직 처리를 위한 Service 계층
-  - QueryDSL을 통한 복잡한 쿼리 처리
-  - AWS Secrets Manager 연동
-  - JWT 토큰 관리
-  - 데이터베이스 연결 및 설정
-
-- **주요 의존성**:
-  - Spring Data JPA, Actuator
-  - JWT (JJWT)
-  - AWS Secrets Manager
-  - MySQL Connector
-  - Spring Security Crypto
-
-- **의존 관계**:
-  - `common` 모듈에 의존
-  - **독립성**: 다른 도메인 모듈에 의존하지 않음
-
----
-
-### 4. notification
-- **역할**: 알림 기능을 담당하는 모듈.
-- **주요 기능**: 
-  - 다양한 알림 채널 지원 (이메일, 슬랙, 웹훅 등)
-  - WebFlux를 통한 비동기 알림 처리
-  - 알림 템플릿 관리
-
-- **주요 의존성**:
-  - Spring WebFlux, Data JPA
-  - QueryDSL
-
-- **의존 관계**:
-  - `common` 모듈에 의존
-  - **독립성**: 다른 도메인 모듈에 의존하지 않음
-
----
-
-### 5. common
-- **역할**: 여러 모듈에서 공통적으로 사용하는 유틸리티, 설정 등을 포함한 모듈.
-- **주요 기능**: 
-  - 공통 유틸리티 클래스 (`DateUtils`, 공통 상수 등)
-  - 공통적인 설정이나 프로퍼티 파일 관리
-  - 공통 예외 처리
-  - 공통 DTO 클래스
-
-- **의존 관계**:
-  - **의존하지 않음**: 다른 모듈들이 `common` 모듈을 의존
-
----
-
-## 🔗 모듈 간 의존 관계
-
-```
-app-api → domain, common
-app-batch → domain, common, notification
-domain → common
-notification → common
-common → (의존 없음)
-```
-
-## 🚀 실행 방법
-
-### 1. 사전 요구사항
-- Java 21
-- MySQL 8.0 이상
-- AWS 자격 증명 설정 (Secrets Manager 사용)
-
-### 2. AWS 설정
-```bash
-# AWS 자격 증명 설정
-aws configure
-# 또는 환경 변수 설정
-export AWS_ACCESS_KEY_ID=your_access_key
-export AWS_SECRET_ACCESS_KEY=your_secret_key
-export AWS_DEFAULT_REGION=ap-northeast-2
-```
-
-### 3. Secrets Manager 설정
-AWS Secrets Manager에 다음과 같은 Secret을 생성하세요:
-- **Secret Name**: `dev/techpost/mysql`
-- **Secret Value**:
-```json
-{
-  "host": "your-rds-endpoint.ap-northeast-2.rds.amazonaws.com",
-  "port": "3306",
-  "username": "your_username",
-  "password": "your_password"
-}
-```
-
-### 4. API 서버 실행
-```bash
-./gradlew :app-api:bootRun
-```
-- 접속 URL: http://localhost:18010
-- 헬스체크: http://localhost:18010/actuator/health
-
-### 5. 배치 서버 실행
-```bash
-./gradlew :app-batch:bootRun
-```
 
 ## 🗂️ 프로젝트 구조
 
@@ -180,17 +70,9 @@ techpost-be/
 └── gradle/          # Gradle 설정
 ```
 
-## 🛠️ 개발 환경 설정
 
-### 1. 로컬 개발 환경
-- Profile: `local`
-- 데이터베이스: 로컬 MySQL 또는 AWS RDS
-- 설정 파일: `application-local.yml`
+--- 
 
-### 2. 운영 환경
-- Profile: `prod`
-- 데이터베이스: AWS RDS
-- 설정 파일: `application-prod.yml`
 
 ## 📝 주요 기능
 
@@ -208,37 +90,100 @@ techpost-be/
 
 ### 모니터링
 - Spring Actuator를 통한 헬스체크
-- AWS Secrets Manager 연결 상태 모니터링
 - 데이터베이스 연결 상태 확인
 
-## 🔧 빌드 및 배포
+---
 
-### 빌드
-```bash
-./gradlew clean build
+## 📦 아키텍처 구조
+
+### 1. 헥사고날 아키텍처 (Ports & Adapters)
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                    ADAPTERS (외부 세계)                       │
+├─────────────────────────────────────────────────────────────┤
+│  app-api          │  app-batch      │  infrastructure-jpa   │
+│  (REST API)       │  (Batch Job)    │  (JPA Repository)     │
+└──────────┬────────┴────────┬────────┴─────────┬─────────────┘
+           │                 │                  │
+           │  Inbound Port   │                  │ Outbound Port
+           ▼                 ▼                  ▼
+┌─────────────────────────────────────────────────────────────┐
+│                    APPLICATION (비즈니스 로직)                 │
+├─────────────────────────────────────────────────────────────┤
+│  ┌─── search/              ┌─── save/                       │
+│  │    port/in (UseCase)    │    port/in (UseCase)           │
+│  │    port/out (Port)      │    port/out (Port)             │
+│  │    service/             │    service/                    │
+│  └─────────────────────────└───────────────────────────     │
+└──────────┬──────────────────────────────────────────────────┘
+           │
+           ▼
+┌─────────────────────────────────────────────────────────────┐
+│                    DOMAIN (핵심 도메인)                        │
+├─────────────────────────────────────────────────────────────┤
+│  Post, Publisher (순수 Java, 프레임워크 독립적)                   │
+└─────────────────────────────────────────────────────────────┘
 ```
 
-### Docker 빌드 (API)
-```bash
-cd app-api
-docker build -t techpost-api .
+<br/>
+
+### 2. 멀티모듈 구조 및 의존성
+
 ```
-
-### Docker 빌드 (Batch)
-```bash
-cd app-batch  
-docker build -t techpost-batch .
+techpost-be/
+│
+├── 📱 app-api (REST API 어댑터)
+│   ├── POST /post (게시물 검색)
+│   ├── UseCase 의존 (인터페이스)
+│   └── Port: 18080
+│
+├── ⚙️ app-batch (배치 어댑터)
+│   ├── PostScrapJob (테크 블로그 스크래핑)
+│   ├── Scheduler (Cron: 매일 07:00)
+│   └── Port: 18020
+│
+├── 🎯 application (비즈니스 로직)
+│   ├── search/ (검색 UseCase)
+│   │   ├── port/in/  PostSearchUseCase
+│   │   ├── port/out/ PostSearchPort
+│   │   └── service/  PostSearchService
+│   └── save/ (저장 UseCase)
+│       ├── port/in/  PostSaveUseCase
+│       ├── port/out/ PostSavePort
+│       └── service/  PostSaveService
+│
+├── 🏛️ infrastructure-jpa (영속성 어댑터)
+│   ├── adapter/search/ PostSearchPersistenceAdapter
+│   ├── adapter/save/   PostSavePersistenceAdapter
+│   ├── entity/         PostJpaEntity
+│   ├── repository/     PostJpaRepository
+│   └── mapper/         PostEntityMapper
+│
+├── 💎 domain (핵심 도메인)
+│   └── post/model/
+│       ├── Post (도메인 모델)
+│       ├── PostId (Value Object)
+│       └── Publisher (Enum)
+│
+├── 🔔 notification (알림)
+│   └── Slack Webhook 클라이언트
+│
+└── 🛠️ common (공통 유틸리티)
+    └── Response, Exception, Utils
+  - Spring Batch, Quartz, WebFlux
+  - Jackson (JSON 처리)
+  - H2 Database (테스트용)
 ```
+--- 
 
-## 📚 참고 문서
+## 🔗 모듈 간 의존 관계
 
-- [RDS 연결 가이드](docs/RDS_CONNECTION_GUIDE.md)
-- [DDL 스크립트](docs/sql/ddl/)
-- [UML 다이어그램](docs/uml/)
-
-## ⚠️ 주의사항
-
-1. **AWS 자격 증명**: 로컬 개발 시 AWS 자격 증명이 올바르게 설정되어야 합니다.
-2. **데이터베이스**: MySQL 8.0 이상 버전을 사용해야 합니다.
-3. **Java 버전**: Java 21을 사용합니다.
-4. **Secret 관리**: 민감한 정보는 AWS Secrets Manager를 통해 관리합니다.
+```
+app-api → domain, common
+app-batch → domain, common, notification
+domain → common
+notification → common
+common → (의존 없음)
+```
+---
