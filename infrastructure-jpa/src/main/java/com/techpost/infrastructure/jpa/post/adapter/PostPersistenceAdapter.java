@@ -53,9 +53,9 @@ public class PostPersistenceAdapter implements PostSearchPort, PostSavePort {
                         postJpaEntity.url,
                         postJpaEntity.publishedAt
                 )
-        );
+        ).orderBy(postJpaEntity.publishedAt.desc());
 
-        JPAQuery<Long> countQuery = buildSearchQuery(query, postJpaEntity.count());
+        JPAQuery<Long> countQuery = buildCountQuery(query);
 
         Pageable pageable = PageRequest.of(query.pageQuery().page(), query.pageQuery().size());
         return PaginationHelper.paginate(contentQuery, countQuery, pageable);
@@ -89,7 +89,7 @@ public class PostPersistenceAdapter implements PostSearchPort, PostSavePort {
     }
 
     /**
-     * QueryDSL 검색 쿼리 빌드
+     * QueryDSL 검색 쿼리 빌드 (ORDER BY 제외)
      */
     private <T> JPAQuery<T> buildSearchQuery(PostSearchQuery query, Expression<T> expression) {
         return jpaQueryFactory
@@ -98,7 +98,19 @@ public class PostPersistenceAdapter implements PostSearchPort, PostSavePort {
                 .where(ExpressionUtils.or(
                         eq(postJpaEntity.publisher, query.getPublisher()),
                         contains(postJpaEntity.title, query.keyword())
-                ))
-                .orderBy(postJpaEntity.publishedAt.desc());
+                ));
+    }
+
+    /**
+     * COUNT 쿼리 빌드 (ORDER BY 없음)
+     */
+    private JPAQuery<Long> buildCountQuery(PostSearchQuery query) {
+        return jpaQueryFactory
+                .select(postJpaEntity.count())
+                .from(postJpaEntity)
+                .where(ExpressionUtils.or(
+                        eq(postJpaEntity.publisher, query.getPublisher()),
+                        contains(postJpaEntity.title, query.keyword())
+                ));
     }
 }
