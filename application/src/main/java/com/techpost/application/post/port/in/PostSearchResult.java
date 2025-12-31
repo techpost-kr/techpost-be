@@ -18,5 +18,14 @@ public class PostSearchResult {
     private String title;
     private String url;
     private LocalDateTime publishedAt;
+
+    public static PostSearchResult of(
+            Long postId,
+            Publisher publisher,
+            String title,
+            String url,
+            LocalDateTime publishedAt) {
+        return new PostSearchResult(postId, publisher, title, url, publishedAt);
+    }
 }
 

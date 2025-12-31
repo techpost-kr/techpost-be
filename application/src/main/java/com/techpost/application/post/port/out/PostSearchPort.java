@@ -27,5 +27,5 @@ public interface PostSearchPort {
      * @param publisher 발행처
      * @return 게시물 목록
      */
-    List<Post> searchByPublisher(Publisher publisher);
+    List<PostSearchResult> searchByPublisher(Publisher publisher);
 }

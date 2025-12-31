@@ -1,7 +1,8 @@
 package com.techpost.appbatch.post.scrap.step;
 
-import com.techpost.application.post.port.in.PostBulkSaveUseCase;
-import com.techpost.domain.post.model.Post;
+import com.techpost.appbatch.post.scrap.dto.PostScrapDto;
+import com.techpost.application.post.port.in.PostSaveUseCase;
+import com.techpost.application.post.port.in.PostSaveCommand;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.infrastructure.item.Chunk;
@@ -18,22 +19,25 @@ import java.util.stream.Collectors;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-public class PostScrapWriter implements ItemWriter<List<Post>> {
+public class PostScrapWriter implements ItemWriter<List<PostScrapDto>> {
 
-    private final PostBulkSaveUseCase postBulkSaveUseCase;
+    private final PostSaveUseCase postSaveUseCase;
 
     @Override
-    public void write(Chunk<? extends List<Post>> chunk) {
+    public void write(Chunk<? extends List<PostScrapDto>> chunk) {
 
         log.info("start scrap writer");
 
-        List<Post> posts = chunk.getItems().stream()
+        List<PostSaveCommand> commands = chunk.getItems().stream()
                 .flatMap(List::stream)
+                .map(PostScrapDto::toCommand)
                 .collect(Collectors.toList());
 
         // UseCase를 통해 게시물 저장
-        postBulkSaveUseCase.saveAll(posts);
+        postSaveUseCase.saveAll(commands);
 
-        log.info("saved {} posts", posts.size());
+        log.info("saved {} posts", commands.size());
     }
+
+
 }

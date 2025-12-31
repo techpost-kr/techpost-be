@@ -1,5 +1,6 @@
 package com.techpost.appbatch.post.scrap.json;
 
+import com.techpost.appbatch.post.scrap.dto.PostScrapDto;
 import com.techpost.appbatch.post.scrap.enums.PublisherScrapEnum;
 import com.techpost.domain.post.model.Post;
 import lombok.Getter;
@@ -16,7 +17,7 @@ import java.util.stream.Collectors;
 public class NaverJsonData {
     private List<NaverContent> content;
 
-    public List<Post> toPosts() {
+    public List<PostScrapDto> toPosts() {
         return content.stream().map(NaverContent::toPost)
                 .collect(Collectors.toList());
     }
@@ -31,8 +32,9 @@ public class NaverJsonData {
         private String postTitle;
         private String url;
 
-        private Post toPost() {
-            return Post.of(PublisherScrapEnum.NAVER.getPublisher(),
+        private PostScrapDto toPost() {
+            return PostScrapDto.of(
+                    PublisherScrapEnum.NAVER.getPublisher(),
                     this.postTitle,
                     PublisherScrapEnum.NAVER.getPostUrl(this.url),
                     toPublishedDateTime());

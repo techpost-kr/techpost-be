@@ -1,4 +1,4 @@
-package com.techpost.appbatch.post;
+package com.techpost.appbatch.post.scrap.scheduler;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

@@ -62,9 +62,9 @@ public class PostPersistenceAdapter implements PostSearchPort, PostSavePort {
     }
 
     @Override
-    public List<Post> searchByPublisher(Publisher publisher) {
+    public List<PostSearchResult> searchByPublisher(Publisher publisher) {
         return postJpaRepository.findByPublisher(publisher).stream()
-                .map(mapper::toDomain)
+                .map(mapper::toSearchResult)
                 .collect(Collectors.toList());
     }
 

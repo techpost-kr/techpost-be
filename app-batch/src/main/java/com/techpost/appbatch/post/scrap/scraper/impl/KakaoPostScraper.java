@@ -2,10 +2,10 @@ package com.techpost.appbatch.post.scrap.scraper.impl;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.techpost.appbatch.post.scrap.dto.PostScrapDto;
 import com.techpost.appbatch.post.scrap.enums.PublisherScrapEnum;
 import com.techpost.appbatch.post.scrap.json.KakaoJsonData;
 import com.techpost.appbatch.post.scrap.scraper.PostScraper;
-import com.techpost.domain.post.model.Post;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -21,7 +21,7 @@ public class KakaoPostScraper extends PostScraper {
     }
 
     @Override
-    public List<Post> scrap() {
+    public List<PostScrapDto> scrap() {
         try {
             String jsonData = super.extractJsonData();
             return parsePosts(jsonData);
@@ -32,7 +32,7 @@ public class KakaoPostScraper extends PostScraper {
     }
 
     @Override
-    protected List<Post> parsePosts(String jsonData) throws JsonProcessingException {
+    protected List<PostScrapDto> parsePosts(String jsonData) throws JsonProcessingException {
         KakaoJsonData kakaoJsonData = super.objectMapper.readValue(jsonData, KakaoJsonData.class);
         return kakaoJsonData.toPosts();
     }

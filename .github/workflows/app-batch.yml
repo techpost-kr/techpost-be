@@ -18,7 +18,7 @@ jobs:
     with:
       project: techpost
       module: app-batch
-      port: 18020
+      port: 18090
       spring_profiles_active: prod
     secrets:
       DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}

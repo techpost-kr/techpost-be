@@ -2,8 +2,8 @@ package com.techpost.appbatch.post.scrap.scraper;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.techpost.appbatch.post.scrap.dto.PostScrapDto;
 import com.techpost.appbatch.post.scrap.enums.PublisherScrapEnum;
-import com.techpost.domain.post.model.Post;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
@@ -20,9 +20,9 @@ public abstract class PostScraper {
         this.objectMapper = objectMapper;
     }
 
-    public abstract List<Post> scrap();
+    public abstract List<PostScrapDto> scrap();
 
-    protected abstract List<Post> parsePosts(String jsonData) throws JsonProcessingException;
+    protected abstract List<PostScrapDto> parsePosts(String jsonData) throws JsonProcessingException;
 
     protected String extractJsonData() throws IOException {
         return WebClient.builder()

@@ -1,5 +1,6 @@
 package com.techpost.infrastructure.jpa.post.mapper;
 
+import com.techpost.application.post.port.in.PostSearchResult;
 import com.techpost.domain.post.model.Post;
 import com.techpost.infrastructure.jpa.post.entity.PostJpaEntity;
 import org.springframework.stereotype.Component;
@@ -27,6 +28,17 @@ public class PostEntityMapper {
      */
     public Post toDomain(PostJpaEntity entity) {
         return Post.of(
+                entity.getPostId(),
+                entity.getPublisher(),
+                entity.getTitle(),
+                entity.getUrl(),
+                entity.getPublishedAt()
+        );
+    }
+
+    public PostSearchResult toSearchResult(PostJpaEntity entity) {
+        return PostSearchResult.of(
+                entity.getPostId(),
                 entity.getPublisher(),
                 entity.getTitle(),
                 entity.getUrl(),

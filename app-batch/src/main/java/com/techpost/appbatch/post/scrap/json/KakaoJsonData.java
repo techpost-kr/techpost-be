@@ -1,6 +1,7 @@
 package com.techpost.appbatch.post.scrap.json;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.techpost.appbatch.post.scrap.dto.PostScrapDto;
 import com.techpost.appbatch.post.scrap.enums.PublisherScrapEnum;
 import com.techpost.domain.post.model.Post;
 import lombok.Getter;
@@ -15,7 +16,7 @@ import java.util.stream.Collectors;
 public class KakaoJsonData {
     private List<KakaoPage> pages;
 
-    public List<Post> toPosts() {
+    public List<PostScrapDto> toPosts() {
         return pages.stream()
                 .flatMap(page -> page.getContents().stream())
                 .map(KakaoPage.KakaoContent::toPost)
@@ -40,8 +41,9 @@ public class KakaoJsonData {
             private KakaoAuthor author;
             private String thumbnailUri;
 
-            private Post toPost() {
-                return Post.of(PublisherScrapEnum.KAKAO.getPublisher(),
+            private PostScrapDto toPost() {
+                return PostScrapDto.of(
+                        PublisherScrapEnum.KAKAO.getPublisher(),
                         this.title,
                         PublisherScrapEnum.KAKAO.getPostUrl(String.valueOf(this.id)),
                         this.releaseDateTime);

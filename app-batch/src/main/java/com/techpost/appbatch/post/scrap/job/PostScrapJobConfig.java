@@ -1,6 +1,7 @@
 package com.techpost.appbatch.post.scrap.job;
 
 import com.techpost.appbatch.common.constant.JobConstants;
+import com.techpost.appbatch.post.scrap.dto.PostScrapDto;
 import com.techpost.appbatch.post.scrap.enums.PublisherScrapEnum;
 import com.techpost.appbatch.post.scrap.step.PostScrapProcessor;
 import com.techpost.appbatch.post.scrap.step.PostScrapReader;
@@ -39,7 +40,7 @@ public class PostScrapJobConfig {
     @Bean
     public Step postScrapJobStep1() {
         return new StepBuilder("postScrapJobStep1", jobRepository)
-                .<PublisherScrapEnum, List<Post>>chunk(1)
+                .<PublisherScrapEnum, List<PostScrapDto>>chunk(1)
                 .reader(reader)
                 .processor(processor)
                 .writer(writer)

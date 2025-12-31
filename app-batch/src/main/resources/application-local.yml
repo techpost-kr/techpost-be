@@ -7,5 +7,5 @@ spring:
 
 slack:
   webhook:
-    url: ${SLACK_WEBHOOK_URL:https://hooks.slack.com/services/DUMMY_URL_FOR_LOCAL}
+    url: ${SLACK_WEBHOOK_URL:https://hooks.slack.com/services/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}
 
